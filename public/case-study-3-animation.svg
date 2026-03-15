@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" fill="#020617"/>
+  
+  <g fill="#1e293b" stroke="#3b82f6" stroke-width="3">
+    <!-- Bar charts growing -->
+    <rect x="150" y="400" width="80" height="100" rx="8">
+      <animate attributeName="height" values="100;180;100" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="400;320;400" dur="3s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="300" y="300" width="80" height="200" rx="8" fill="#3b82f6" stroke="none">
+      <animate attributeName="height" values="200;300;200" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="300;200;300" dur="4s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="450" y="200" width="80" height="300" rx="8">
+      <animate attributeName="height" values="300;250;300" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="200;250;200" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="600" y="100" width="80" height="400" rx="8" fill="#6366f1" stroke="none">
+      <animate attributeName="height" values="400;480;400" dur="3.5s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="100;20;100" dur="3.5s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  
+  <!-- Data line charting up -->
+  <path d="M100 350 Q 250 150, 450 200 T 750 50" stroke="#10b981" stroke-width="6" fill="none" stroke-linecap="round">
+    <animate attributeName="stroke-dasharray" values="0,1500; 1500,0" dur="3s" repeatCount="indefinite"/>
+  </path>
+</svg>

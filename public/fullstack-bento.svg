@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 200" fill="none">
+  <defs>
+    <!-- Code Editor Window Pattern -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="15" flood-color="#00E5FF" flood-opacity="0.15" />
+    </filter>
+    <linearGradient id="windowGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+  </defs>
+
+  <!-- Editor Base -->
+  <rect x="25" y="20" width="450" height="160" rx="12" fill="url(#windowGradient)" stroke="#1E293B" stroke-width="2" filter="url(#shadow)" />
+  
+  <!-- Editor Header -->
+  <rect x="26" y="21" width="448" height="30" rx="11" fill="#1E293B" />
+  <circle cx="45" cy="36" r="5" fill="#EF4444" />
+  <circle cx="65" cy="36" r="5" fill="#EAB308" />
+  <circle cx="85" cy="36" r="5" fill="#22C55E" />
+  <text x="250" y="40" fill="#64748B" font-family="monospace" font-size="12" text-anchor="middle">deploy.config.ts</text>
+
+  <!-- Syntax Highlighting & Typing Animation -->
+  <g font-family="monospace" font-size="14" font-weight="500">
+    <text x="45" y="80">
+      <tspan fill="#C678DD">const</tspan> <tspan fill="#61AFEF">systemArchitecture</tspan> = <tspan fill="#C678DD">{'{'}</tspan>
+    </text>
+    
+    <text x="65" y="105">
+      <tspan fill="#E06C75">runtime</tspan>: <tspan fill="#98C379">'NodeJS'</tspan>,
+    </text>
+    
+    <text x="65" y="130">
+      <tspan fill="#E06C75">scale</tspan>: <tspan fill="#D19A66">Infinite</tspan>,
+    </text>
+    
+    <text x="65" y="155">
+      <tspan fill="#E06C75">status</tspan>: <tspan fill="#98C379" id="deployStatus">'Deploying...'</tspan>
+      <animate attributeName="opacity" values="1;0.5;1" dur="1.5s" repeatCount="indefinite" />
+    </text>
+
+    <text x="45" y="180" fill="#C678DD">{'}'};</text>
+  </g>
+
+  <!-- Floating Layers / Deployment Blocks -->
+  <g transform="translate(340, 60)">
+    <rect x="0" y="0" width="100" height="25" rx="4" fill="#0EA5E9" fill-opacity="0.2" stroke="#0EA5E9" stroke-width="2">
+      <animate attributeName="y" values="100;0;100" dur="4s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0;1;0" dur="4s" repeatCount="indefinite" />
+    </rect>
+    <rect x="0" y="35" width="100" height="25" rx="4" fill="#8B5CF6" fill-opacity="0.2" stroke="#8B5CF6" stroke-width="2">
+      <animate attributeName="y" values="100;35;100" dur="4s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0;1;0" dur="4s" repeatCount="indefinite" />
+    </rect>
+    <rect x="0" y="70" width="100" height="25" rx="4" fill="#22C55E" fill-opacity="0.2" stroke="#22C55E" stroke-width="2">
+      <animate attributeName="y" values="100;70;100" dur="4s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0;1;0" dur="4s" repeatCount="indefinite" />
+    </rect>
+  </g>
+</svg>

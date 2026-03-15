@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" fill="#020617"/>
+  
+  <!-- Cloud Body -->
+  <path d="M 250 300 C 250 200 400 160 400 250 C 450 180 570 230 550 320 C 620 320 620 420 500 420 L 300 420 C 180 420 180 300 250 300 Z" fill="#0f172a" stroke="#1e293b" stroke-width="4"/>
+  
+  <!-- Upload arrows animating up into the cloud -->
+  <g stroke="#3b82f6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M400 500 L400 280">
+       <animate attributeName="stroke-dashoffset" values="150;0;-150" dur="2s" repeatCount="indefinite"/>
+       <animate attributeName="stroke-dasharray" values="150" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <polyline points="360,320 400,280 440,320">
+       <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+    </polyline>
+  </g>
+  
+  <!-- Floating server rack -->
+  <rect x="250" y="480" width="300" height="60" rx="8" fill="#0f172a" stroke="#3b82f6" stroke-width="2"/>
+  <circle cx="280" cy="510" r="10" fill="#22c55e">
+    <animate attributeName="opacity" values="0.2;1;0.2" dur="1s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="320" cy="510" r="10" fill="#3b82f6">
+    <animate attributeName="opacity" values="0.2;1;0.2" dur="1s" begin="0.5s" repeatCount="indefinite"/>
+  </circle>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" fill="#020617"/>
+  
+  <!-- Outer Shield -->
+  <path d="M400 100 L600 200 L600 400 L400 550 L200 400 L200 200 Z" fill="#0f172a" stroke="#3b82f6" stroke-width="6" stroke-linejoin="round"/>
+  
+  <!-- Inner animated dashed shield -->
+  <path d="M400 130 L570 215 L570 385 L400 515 L230 385 L230 215 Z" stroke="#10b981" stroke-width="4" stroke-dasharray="20 20" stroke-linejoin="round">
+     <animate attributeName="stroke-dashoffset" from="0" to="200" dur="4s" repeatCount="indefinite" linear="linear"/>
+  </path>
+  
+  <!-- Lock pulsing in center -->
+  <circle cx="400" cy="325" r="50" fill="#3b82f6">
+     <animate attributeName="r" values="40;60;40" dur="2s" repeatCount="indefinite"/>
+     <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <path d="M380 325 L400 345 L430 295" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

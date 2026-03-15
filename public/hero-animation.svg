@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <defs>
+    <!-- Glow Filters -->
+    <filter id="coreGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="15" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="subtleGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Gradients -->
+    <linearGradient id="cyberGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="100%" stop-color="#2962FF"/>
+    </linearGradient>
+    <linearGradient id="successGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22C55E"/>
+      <stop offset="100%" stop-color="#10B981"/>
+    </linearGradient>
+
+    <!-- Grid Pattern -->
+    <pattern id="hexGrid" width="40" height="69.282" patternUnits="userSpaceOnUse" patternTransform="scale(0.5)">
+      <path d="M 40 11.547 L 40 34.641 L 20 46.188 L 0 34.641 L 0 11.547 L 20 0 Z M 20 69.282 L 0 57.735 L 0 34.641 L 20 46.188 L 40 34.641 L 40 57.735 Z" fill="none" stroke="#1E293B" stroke-width="1"/>
+    </pattern>
+
+    <pattern id="dotGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="#1E293B" />
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="#020617"/>
+  <rect width="800" height="600" fill="url(#dotGrid)"/>
+  
+  <g opacity="0.4">
+    <rect width="800" height="600" fill="url(#hexGrid)"/>
+    <animate attributeName="opacity" values="0.2;0.5;0.2" dur="8s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- Central Processor / Core -->
+  <g transform="translate(400, 300)">
+    <!-- Rotating Outer Rings -->
+    <circle cx="0" cy="0" r="140" fill="none" stroke="url(#cyberGradient)" stroke-width="1" stroke-dasharray="4 12" filter="url(#subtleGlow)">
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="20s" repeatCount="indefinite" linear="linear"/>
+    </circle>
+    
+    <circle cx="0" cy="0" r="120" fill="none" stroke="#2962FF" stroke-width="2" stroke-dasharray="60 40 20 40">
+      <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="15s" repeatCount="indefinite" linear="linear"/>
+    </circle>
+
+    <!-- Central Chip Base -->
+    <rect x="-60" y="-60" width="120" height="120" rx="16" fill="#0A1128" stroke="#1E293B" stroke-width="4"/>
+    <rect x="-50" y="-50" width="100" height="100" rx="12" fill="none" stroke="url(#cyberGradient)" stroke-width="2" filter="url(#coreGlow)"/>
+    
+    <!-- Code Symbol deeply embedded -->
+    <text x="0" y="15" fill="#ffffff" font-family="monospace" font-size="40" font-weight="bold" text-anchor="middle" letter-spacing="-2">&lt;/&gt;
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite"/>
+    </text>
+
+    <!-- Pulsing Inner Core -->
+    <circle cx="0" cy="0" r="8" fill="#00E5FF" filter="url(#coreGlow)">
+      <animate attributeName="r" values="6;10;6" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Data Flow Lines connecting to Core -->
+  <g fill="none" stroke-width="3" filter="url(#subtleGlow)">
+    <!-- Top Left Flow -->
+    <path d="M 150 150 L 250 150 L 320 220" stroke="url(#cyberGradient)" stroke-dasharray="10 10">
+      <animate attributeName="stroke-dashoffset" values="40;0" dur="1s" linear="linear" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- Bottom Left Flow -->
+    <path d="M 150 450 L 250 450 L 320 380" stroke="url(#cyberGradient)" stroke-dasharray="10 10">
+      <animate attributeName="stroke-dashoffset" values="40;0" dur="1.2s" linear="linear" repeatCount="indefinite"/>
+    </path>
+
+    <!-- Top Right Flow -->
+    <path d="M 650 150 L 550 150 L 480 220" stroke="url(#successGradient)" stroke-dasharray="10 10">
+      <animate attributeName="stroke-dashoffset" values="0;40" dur="1.5s" linear="linear" repeatCount="indefinite"/>
+    </path>
+
+    <!-- Bottom Right Flow -->
+    <path d="M 650 450 L 550 450 L 480 380" stroke="url(#cyberGradient)" stroke-dasharray="10 10">
+      <animate attributeName="stroke-dashoffset" values="0;40" dur="0.8s" linear="linear" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Connected Floating Modules -->
+  
+  <!-- Module 1: Cloud -->
+  <g transform="translate(90, 120)">
+    <rect x="0" y="0" width="120" height="60" rx="8" fill="#0F172A" stroke="#334155" stroke-width="2"/>
+    <text x="60" y="35" fill="#94A3B8" font-family="monospace" font-size="14" font-weight="600" text-anchor="middle">CLOUD_API</text>
+    <circle cx="10" cy="10" r="4" fill="#00E5FF">
+       <animate attributeName="opacity" values="0.2;1;0.2" dur="1s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Module 2: Database -->
+  <g transform="translate(90, 420)">
+    <rect x="0" y="0" width="120" height="60" rx="8" fill="#0F172A" stroke="#334155" stroke-width="2"/>
+    <text x="60" y="35" fill="#94A3B8" font-family="monospace" font-size="14" font-weight="600" text-anchor="middle">DB_CLUSTER</text>
+    <rect x="10" y="5" width="20" height="4" rx="2" fill="#22C55E">
+       <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <!-- Module 3: Security / Auth -->
+  <g transform="translate(590, 120)">
+    <rect x="0" y="0" width="120" height="60" rx="8" fill="#0F172A" stroke="#334155" stroke-width="2"/>
+    <text x="60" y="35" fill="#22C55E" font-family="monospace" font-size="14" font-weight="600" text-anchor="middle">AUTH_SECURE</text>
+    <path d="M 10 15 L 20 25 L 35 10" fill="none" stroke="#22C55E" stroke-width="2"/>
+  </g>
+
+  <!-- Module 4: Client App -->
+  <g transform="translate(590, 420)">
+    <rect x="0" y="0" width="120" height="60" rx="8" fill="#0F172A" stroke="#334155" stroke-width="2"/>
+    <text x="60" y="35" fill="#94A3B8" font-family="monospace" font-size="14" font-weight="600" text-anchor="middle">CLIENT_UI</text>
+    <circle cx="10" cy="10" r="4" fill="#2962FF">
+       <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Horizontal Scanning Laser -->
+  <rect x="0" y="0" width="800" height="2" fill="#00E5FF" opacity="0.3" filter="url(#coreGlow)">
+    <animate attributeName="y" values="-20;620;-20" dur="6s" repeatCount="indefinite"/>
+  </rect>
+</svg>

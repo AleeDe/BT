@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" fill="#020617"/>
+  
+  <!-- Map grid -->
+  <g stroke="#1e293b" stroke-width="2" opacity="0.5">
+    <path d="M0 100H800 M0 200H800 M0 300H800 M0 400H800 M0 500H800"/>
+    <path d="M100 0V600 M200 0V600 M300 0V600 M400 0V600 M500 0V600 M600 0V600 M700 0V600"/>
+  </g>
+  
+  <!-- GPS Tracking Route -->
+  <path id="route1" d="M 150 150 Q 300 400, 500 200 T 700 450" stroke="#3b82f6" stroke-width="4" stroke-dasharray="15 15" fill="none">
+    <animate attributeName="stroke-dashoffset" from="300" to="0" dur="3s" repeatCount="indefinite" linear="linear"/>
+  </path>
+  
+  <!-- Moving fleet vehicle 1 -->
+  <g>
+    <animateMotion dur="6s" repeatCount="indefinite" path="M 150 150 Q 300 400, 500 200 T 700 450"/>
+    <circle r="14" fill="#10b981"/>
+    <!-- Radar ping -->
+    <circle r="14" fill="none" stroke="#10b981" stroke-width="2">
+      <animate attributeName="r" values="14;40" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="1;0" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Moving fleet vehicle 2 -->
+  <g>
+    <animateMotion dur="8s" repeatCount="indefinite" path="M 700 450 T 500 200 Q 300 400, 150 150"/>
+    <circle r="12" fill="#6366f1"/>
+     <!-- Radar ping -->
+    <circle r="12" fill="none" stroke="#6366f1" stroke-width="2">
+      <animate attributeName="r" values="12;35" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="1;0" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Central Command Hub -->
+  <rect x="360" y="260" width="80" height="80" rx="16" fill="#0f172a" stroke="#3b82f6" stroke-width="3"/>
+  <circle cx="400" cy="300" r="15" fill="#3b82f6">
+    <animate attributeName="opacity" values="0.2;1;0.2" dur="1s" repeatCount="indefinite"/>
+  </circle>
+</svg>

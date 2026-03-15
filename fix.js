@@ -1,0 +1,1 @@
+﻿const fs = require("fs"); let c = fs.readFileSync("src/components/IndustriesSection.tsx", "utf8"); c = c.replace(/href=\"\/industries\"(\s*className=\"flex items-center justify-center space-x-2 bg-blue-600)/, "href=\"/contact\"$1"); fs.writeFileSync("src/components/IndustriesSection.tsx", c);
