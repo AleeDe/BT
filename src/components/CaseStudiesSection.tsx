@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -28,13 +29,12 @@ function CaseStudyCard({ study, index }: { study: CaseStudy; index: number }) {
         {/* Visual / GIF Section - 50% width */}
         <div className="w-full lg:w-1/2 relative min-h-[300px] lg:min-h-full bg-slate-950 overflow-hidden">
           <div className="absolute inset-0 bg-blue-500/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none mix-blend-overlay"></div>
-          <img 
+          <Image
             src={study.gifSrc} 
             alt={study.title}
+            fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
             className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
-            onError={(e) => {
-              e.currentTarget.src = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop";
-            }}
           />
           <div className={`absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent z-10 ${isEven ? 'lg:bg-gradient-to-r' : 'lg:bg-gradient-to-l'}`}></div>
         </div>

@@ -1,10 +1,6 @@
-import { CaseStudiesSection } from "@/components/CaseStudiesSection";
-import { motion } from "framer-motion";
+
+import CaseStudiesSectionClient from "@/components/CaseStudiesSectionClient";
 
 export default function CaseStudiesPage() {
-  return (
-    <div className="min-h-screen bg-[#0A1128] pt-16">
-      <CaseStudiesSection />
-    </div>
-  );
+  return <CaseStudiesSectionClient />;
 }

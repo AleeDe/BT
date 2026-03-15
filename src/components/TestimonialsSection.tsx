@@ -1,10 +1,51 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Star, ExternalLink } from "lucide-react";
 
-function TestimonialCard({ testimonial, index }: { testimonial: any; index: number }) {
+type Testimonial = {
+  name: string;
+  role: string;
+  company: string;
+  website?: string;
+  image: string;
+  review: string;
+  rating: number;
+};
+
+const testimonials: Testimonial[] = [
+  {
+    name: "Sarah Jenkins",
+    role: "CTO",
+    company: "FinTech Elevate",
+    website: "https://example.com/fintech",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop",
+    review: "BabulTech completely revamped our CRM architecture. The pay-as-you-go model and their rapid execution saved us months of development time and integrated flawlessly with our existing stack.",
+    rating: 5
+  },
+  {
+    name: "David Chen",
+    role: "Operations Director",
+    company: "Global Logistics",
+    website: "https://example.com/logistics",
+    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600&auto=format&fit=crop",
+    review: "We had critical bottlenecks in our data pipelines. BabulTech provided extremely smart solutions that scaled our throughput intelligently. Their team works like an extension of our own.",
+    rating: 5
+  },
+  {
+    name: "Emily Rodriguez",
+    role: "VP of Engineering",
+    company: "HealthSync",
+    website: "https://example.com/healthsync",
+    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=600&auto=format&fit=crop",
+    review: "Their full-stack expertise is unmatched. From securing our infrastructure to delivering a blazing fast frontend, the level of precision and collaborative partnership was phenomenal.",
+    rating: 5
+  }
+];
+
+function TestimonialCard({ testimonial, index }: { testimonial: Testimonial; index: number }) {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -20,9 +61,11 @@ function TestimonialCard({ testimonial, index }: { testimonial: any; index: numb
     >
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <img
+        <Image
           src={testimonial.image}
           alt={testimonial.name}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className={`w-full h-full object-cover transition-transform duration-700 ease-out ${expanded ? "scale-110 opacity-20" : "opacity-50"}`}
         />
         <div className={`absolute inset-0 bg-gradient-to-t from-[#0A1128] via-[#0A1128]/80 to-transparent transition-opacity duration-500 ${expanded ? "opacity-90" : "opacity-80"}`}></div>
@@ -33,7 +76,7 @@ function TestimonialCard({ testimonial, index }: { testimonial: any; index: numb
         {/* Visible Text */}
         <div className={`relative z-10 transform transition-transform duration-500 ease-out ${expanded ? "-translate-y-4" : ""}`}>
           <div className={`w-16 h-16 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center p-1 mb-6 transition-all duration-500 ${expanded ? "opacity-100 -translate-y-2" : "opacity-0 translate-y-4"}`}>
-            <img src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover rounded-xl" />
+            <Image src={testimonial.image} alt={testimonial.name} width={64} height={64} className="w-full h-full object-cover rounded-xl" />
           </div>
 
           <h3 className={`text-2xl font-bold text-white mb-1 transition-colors duration-300 ${expanded ? "text-[#00E5FF]" : ""}`}>{testimonial.name}</h3>
@@ -68,7 +111,7 @@ function TestimonialCard({ testimonial, index }: { testimonial: any; index: numb
               ))}
             </div>
             <p className="text-gray-300 text-sm leading-relaxed mb-6 border-t border-white/10 pt-4 italic">
-              "{testimonial.review}"
+              &ldquo;{testimonial.review}&rdquo;
             </p>
           </div>
         </div>
@@ -85,36 +128,6 @@ function TestimonialCard({ testimonial, index }: { testimonial: any; index: numb
 }
 
 export function TestimonialsSection() {
-  const testimonials = [
-    {
-      name: "Sarah Jenkins",
-      role: "CTO",
-      company: "FinTech Elevate",
-      website: "https://example.com/fintech",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop",
-      review: "BabulTech completely revamped our CRM architecture. The pay-as-you-go model and their rapid execution saved us months of development time and integrated flawlessly with our existing stack.",
-      rating: 5
-    },
-    {
-      name: "David Chen",
-      role: "Operations Director",
-      company: "Global Logistics",
-      website: "https://example.com/logistics",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600&auto=format&fit=crop",
-      review: "We had critical bottlenecks in our data pipelines. BabulTech provided extremely smart solutions that scaled our throughput intelligently. Their team works like an extension of our own.",
-      rating: 5
-    },
-    {
-      name: "Emily Rodriguez",
-      role: "VP of Engineering",
-      company: "HealthSync",
-      website: "https://example.com/healthsync",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=600&auto=format&fit=crop",
-      review: "Their full-stack expertise is unmatched. From securing our infrastructure to delivering a blazing fast frontend, the level of precision and collaborative partnership was phenomenal.",
-      rating: 5
-    }
-  ];
-
   return (
     <section className="py-24 relative overflow-hidden bg-black/20">
       <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-[#2962FF]/10 rounded-full blur-[120px] -translate-y-1/2 -z-10 pointer-events-none" />
@@ -137,7 +150,7 @@ export function TestimonialsSection() {
             transition={{ delay: 0.1 }}
             className="text-gray-400 text-lg"
           >
-            Discover how we've helped enterprises scale, secure, and innovate.
+            Discover how we&apos;ve helped enterprises scale, secure, and innovate.
           </motion.p>
         </div>
 

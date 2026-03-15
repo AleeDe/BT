@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Mail, Phone, MapPin, Twitter, Linkedin, Github, ArrowRight } from "lucide-react";
 
@@ -12,7 +13,13 @@ export default function Footer() {
           <div className="space-y-6">
             <Link href="/" className="inline-block group relative p-1 transition-all duration-300">
               <div className="absolute inset-0 bg-gradient-to-r from-[#2962FF] to-[#00E5FF] [mask-image:url('/logo.png')] [mask-size:contain] [mask-repeat:no-repeat] [mask-position:left_center] drop-shadow-[0_0_12px_rgba(41,98,255,0.7)] group-hover:from-[#00E5FF] group-hover:to-[#2962FF] transition-all duration-500 z-10" />
-              <img src="/logo.png" alt="BabulTech Logo" className="h-9 sm:h-10 w-auto object-contain opacity-0 z-0" />
+              <Image
+                src="/logo.png"
+                alt="BabulTech Logo"
+                width={176}
+                height={40}
+                className="h-9 sm:h-10 w-auto object-contain opacity-0 z-0"
+              />
             </Link>
             <p className="text-slate-400 leading-relaxed text-sm">
               Delivering certified expertise and rapid resolution across enterprise IT, CRM implementation, and scalable full-stack applications.

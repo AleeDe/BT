@@ -1,8 +1,15 @@
 ﻿"use client";
 
+
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Landmark, ShoppingCart, Factory, ShieldCheck, ArrowRight, LayoutGrid } from "lucide-react";
+const Landmark = dynamic(() => import("lucide-react").then(mod => mod.Landmark), { ssr: false });
+const ShoppingCart = dynamic(() => import("lucide-react").then(mod => mod.ShoppingCart), { ssr: false });
+const Factory = dynamic(() => import("lucide-react").then(mod => mod.Factory), { ssr: false });
+const ShieldCheck = dynamic(() => import("lucide-react").then(mod => mod.ShieldCheck), { ssr: false });
+const ArrowRight = dynamic(() => import("lucide-react").then(mod => mod.ArrowRight), { ssr: false });
+const LayoutGrid = dynamic(() => import("lucide-react").then(mod => mod.LayoutGrid), { ssr: false });
 
 const industriesPageData = [
   {

@@ -1,10 +1,9 @@
-'use client';
-
-import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
-import { MouseEvent } from 'react';
+import Image from 'next/image';
 import { 
-  Server, Shield, Smartphone, Workflow, 
-  Layers, LineChart, Cpu, Fingerprint 
+  Server,
+  Workflow,
+  Layers,
+  Fingerprint,
 } from 'lucide-react';
 
 // Advanced UI Component: Mouse-tracking glowing border card (Spotlight Card)
@@ -14,58 +13,20 @@ function SpotlightCard({
   children: React.ReactNode; 
   colSpan?: number 
 }) {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  function handleMouseMove({ currentTarget, clientX, clientY }: MouseEvent) {
-    const { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-  }
-
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5 }}
+    <div
       className={`relative group rounded-3xl border border-white/10 bg-[#0A1128] overflow-hidden ${
         colSpan === 2 ? 'md:col-span-2' : ''
       }`}
-      onMouseMove={handleMouseMove}
     >
-      {/* Dynamic Hover Glow */}
-      <motion.div
-        className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition duration-500 group-hover:opacity-100 z-0"
-        style={{
-          background: useMotionTemplate`
-            radial-gradient(
-              650px circle at ${mouseX}px ${mouseY}px,
-              rgba(0, 229, 255, 0.15),
-              transparent 80%
-            )
-          `,
-        }}
-      />
-      {/* Secondary inner glow for extra depth */}
-      <motion.div
-        className="pointer-events-none absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100 z-0"
-        style={{
-          background: useMotionTemplate`
-            radial-gradient(
-              300px circle at ${mouseX}px ${mouseY}px,
-              rgba(41, 98, 255, 0.1),
-              transparent 80%
-            )
-          `,
-        }}
-      />
+      <div className="pointer-events-none absolute -inset-px rounded-3xl bg-[radial-gradient(circle_at_top,rgba(0,229,255,0.14),transparent_55%)] opacity-0 transition duration-500 group-hover:opacity-100 z-0" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(41,98,255,0.14),transparent_60%)] opacity-0 transition duration-500 group-hover:opacity-100 z-0" />
       
       {/* Content wrapper */}
       <div className="relative z-10 h-full p-5 sm:p-8 flex flex-col">
         {children}
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -90,15 +51,11 @@ export function ExpertiseShowcase() {
         <p className="text-gray-500 uppercase tracking-widest text-sm font-semibold mb-8">
           Trusted by Innovative Enterprises
         </p>
-        <div className="relative w-full max-w-7xl flex overflow-hidden mask-gradient-edges">
+          <div className="enterprise-marquee relative w-full max-w-7xl flex overflow-hidden mask-gradient-edges">
            {/* Masking fading edges using CSS */}
            <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-r from-[#050814] via-transparent to-[#050814] w-full" />
            
-           <motion.div 
-              className="flex whitespace-nowrap gap-16 item-center pl-16 opacity-50 hover:opacity-100 transition-opacity duration-500"
-              animate={{ x: ["0%", "-50%"] }}
-              transition={{ duration: 40, ease: "linear", repeat: Infinity }}
-            >
+            <div className="enterprise-marquee-track flex whitespace-nowrap gap-16 item-center pl-16 opacity-50 hover:opacity-100 transition-opacity duration-500">
               {/* Double array to create seamless loop */}
               {[...enterpriseLogos, ...enterpriseLogos, ...enterpriseLogos].map((c, idx) => (
                 <a 
@@ -114,7 +71,7 @@ export function ExpertiseShowcase() {
                   <span className="text-xl font-bold tracking-tight">{c.name}</span>
                 </a>
               ))}
-           </motion.div>
+           </div>
         </div>
       </div>
 
@@ -148,7 +105,7 @@ export function ExpertiseShowcase() {
               </p>
               {/* Inserted Beautiful Coded Graphic */}
               <div className="w-full h-36 sm:h-48 bg-[#03050D] border border-white/5 rounded-xl overflow-hidden relative group-hover:border-white/20 transition-colors duration-500">
-                 <img src="/fullstack-bento.svg" alt="Code deployment animation" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                 <Image src="/fullstack-bento.svg" alt="Code deployment animation" fill sizes="(max-width: 768px) 100vw, 66vw" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
               </div>
             </div>
           </SpotlightCard>
@@ -181,7 +138,7 @@ export function ExpertiseShowcase() {
           {/* Large-ish Card: Data Analytics */}
           <SpotlightCard colSpan={2}>
             <div className="absolute inset-0 opacity-40 pointer-events-none group-hover:opacity-100 transition-opacity duration-500 overflow-hidden mix-blend-screen rounded-3xl">
-              <img src="/data-bento.svg" alt="Data flow chart" className="w-full h-full object-cover translate-y-12" />
+              <Image src="/data-bento.svg" alt="Data flow chart" fill sizes="(max-width: 768px) 100vw, 66vw" className="w-full h-full object-cover translate-y-12" />
             </div>
             <div className="p-4 rounded-2xl bg-[#00E5FF]/20 text-[#00E5FF] border border-[#00E5FF]/30 w-max mb-8 relative z-10">
               <Layers size={28} />

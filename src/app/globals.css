@@ -20,6 +20,38 @@ body {
   color: var(--foreground);
 }
 
+.enterprise-marquee {
+  overflow: hidden;
+}
+
+.enterprise-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: enterprise-marquee 36s linear infinite;
+  will-change: transform;
+}
+
+.enterprise-marquee:hover .enterprise-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes enterprise-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enterprise-marquee-track {
+    animation: none;
+    transform: none;
+  }
+}
+
 /* Base custom utility styles */
 .glass-panel {
   @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-xl;

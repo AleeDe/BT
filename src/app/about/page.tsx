@@ -1,8 +1,17 @@
 "use client";
 
+
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Target, Shield, Zap, Users, CheckCircle2, Mail, Linkedin, RefreshCcw } from "lucide-react";
+const Linkedin = dynamic(() => import("lucide-react").then(mod => mod.Linkedin), { ssr: false });
+const Mail = dynamic(() => import("lucide-react").then(mod => mod.Mail), { ssr: false });
+const CheckCircle2 = dynamic(() => import("lucide-react").then(mod => mod.CheckCircle2), { ssr: false });
+const Target = dynamic(() => import("lucide-react").then(mod => mod.Target), { ssr: false });
+const Shield = dynamic(() => import("lucide-react").then(mod => mod.Shield), { ssr: false });
+const Zap = dynamic(() => import("lucide-react").then(mod => mod.Zap), { ssr: false });
+const Users = dynamic(() => import("lucide-react").then(mod => mod.Users), { ssr: false });
+const RefreshCcw = dynamic(() => import("lucide-react").then(mod => mod.RefreshCcw), { ssr: false });
 
 function TeamMemberCard({ member, index }: { member: any; index: number }) {
   const [expanded, setExpanded] = useState(false);

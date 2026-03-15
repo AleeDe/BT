@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Menu, X, ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -21,7 +22,14 @@ export function Navigation() {
         {/* Logo */}
         <Link href="/" className="flex items-center group relative p-1 transition-all duration-300">
           <div className="absolute inset-0 bg-gradient-to-r from-[#2962FF] to-[#00E5FF] [mask-image:url('/logo.png')] [mask-size:contain] [mask-repeat:no-repeat] [mask-position:left_center] drop-shadow-[0_0_12px_rgba(41,98,255,0.7)] group-hover:from-[#00E5FF] group-hover:to-[#2962FF] transition-all duration-500 z-10" />
-          <img src="/logo.png" alt="BabulTech Logo" className="h-10 sm:h-12 w-auto object-contain opacity-0 z-0" />
+          <Image
+            src="/logo.png"
+            alt="BabulTech Logo"
+            width={192}
+            height={48}
+            priority
+            className="h-10 sm:h-12 w-auto object-contain opacity-0 z-0"
+          />
         </Link>
         
         {/* Desktop Nav */}

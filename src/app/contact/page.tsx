@@ -1,8 +1,17 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, MessageSquare, User, ArrowRight, CheckCircle2 } from 'lucide-react';
+
+import dynamic from "next/dynamic";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+const Mail = dynamic(() => import("lucide-react").then(mod => mod.Mail), { ssr: false });
+const Phone = dynamic(() => import("lucide-react").then(mod => mod.Phone), { ssr: false });
+const MapPin = dynamic(() => import("lucide-react").then(mod => mod.MapPin), { ssr: false });
+const Send = dynamic(() => import("lucide-react").then(mod => mod.Send), { ssr: false });
+const MessageSquare = dynamic(() => import("lucide-react").then(mod => mod.MessageSquare), { ssr: false });
+const User = dynamic(() => import("lucide-react").then(mod => mod.User), { ssr: false });
+const ArrowRight = dynamic(() => import("lucide-react").then(mod => mod.ArrowRight), { ssr: false });
+const CheckCircle2 = dynamic(() => import("lucide-react").then(mod => mod.CheckCircle2), { ssr: false });
 
 export default function ContactPage() {
   const [formState, setFormState] = useState({ name: '', email: '', subject: '', message: '' });
