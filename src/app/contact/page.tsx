@@ -1,9 +1,8 @@
 'use client';
 
 import dynamic from "next/dynamic";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import emailjs from '@emailjs/browser';
 
 const Mail = dynamic(() => import("lucide-react").then(mod => mod.Mail), { ssr: false });
 const Phone = dynamic(() => import("lucide-react").then(mod => mod.Phone), { ssr: false });
@@ -24,42 +23,75 @@ export default function ContactPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState('');
 
-  useEffect(() => {
-    emailjs.init({
-      publicKey: "cPshVUo9GqjUINXMg",
-    });
-  }, []);
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitError('');
 
     try {
-      const response = await emailjs.send(
-        'service_i90lc0f',
-        'template_g5op7ol',
-        {
-          name: formState.name,
-          email: formState.email,
-          subject: formState.subject,
-          message: formState.message,
-          reply_to: formState.email,
-          from_name: formState.name,
-        }
-      );
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState),
+      });
 
-      console.log('EmailJS success:', response);
+      if (!response.ok) {
+        const data = (await response.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(data?.error || 'Failed to send message. Please try again.');
+      }
+
+      const data = (await response.json()) as { submissionId?: string };
 
       setIsSubmitted(true);
       setFormState({ name: '', email: '', subject: '', message: '' });
 
       setTimeout(() => setIsSubmitted(false), 5000);
+
+      if (data.submissionId) {
+        void pollSubmissionStatus(data.submissionId);
+      }
     } catch (err) {
-      console.error("Failed to send email:", err);
-      setSubmitError('Failed to send message. Please try again.');
+      console.error('Failed to submit contact form:', err);
+      setSubmitError(err instanceof Error ? err.message : 'Failed to send message. Please try again.');
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const pollSubmissionStatus = async (submissionId: string) => {
+    const maxAttempts = 12;
+
+    for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
+      try {
+        const response = await fetch(`/api/contact?submissionId=${encodeURIComponent(submissionId)}`, {
+          method: 'GET',
+          cache: 'no-store',
+        });
+
+        if (!response.ok) {
+          continue;
+        }
+
+        const statusData = (await response.json()) as {
+          status?: 'processing' | 'success' | 'failed';
+          error?: string;
+        };
+
+        if (statusData.status === 'success') {
+          return;
+        }
+
+        if (statusData.status === 'failed') {
+          setSubmitError(statusData.error || 'Your form was received, but backend processing failed. Please contact support.');
+          return;
+        }
+      } catch (error) {
+        console.error('Failed to check submission status:', error);
+      }
     }
   };
 
@@ -250,7 +282,7 @@ export default function ContactPage() {
                     ) : isSubmitted ? (
                       <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="flex items-center gap-2 text-foreground">
                         <CheckCircle2 className="w-5 h-5" />
-                        <span>Message Sent!</span>
+                        <span>Form Submitted!</span>
                       </motion.div>
                     ) : (
                       <>
@@ -268,6 +300,16 @@ export default function ContactPage() {
                     className="text-red-400 text-sm font-medium text-center"
                   >
                     {submitError}
+                  </motion.p>
+                )}
+
+                {isSubmitted && !submitError && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-emerald-400 text-sm font-medium text-center"
+                  >
+                    Form submitted successfully. We are processing your request in background.
                   </motion.p>
                 )}
               </div>

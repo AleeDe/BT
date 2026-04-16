@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Target, Shield, Zap, Users, Database, Lightbulb } from "lucide-react";
+import { Target, Shield, Zap, Users, Database, Lightbulb, BrainCircuit } from "lucide-react";
 
 const services = [
   {
@@ -33,7 +33,12 @@ const services = [
     icon: <Users className="w-8 h-8 text-primary" />,
     title: "Collaborative Partnership",
     description: "We work as an extension of your team, providing transparent communication and dedicated support.",
-  }
+  },
+  {
+    icon: <BrainCircuit className="w-8 h-8 text-primary" />,
+    title: "AI & Data Science",
+    description: "Coming Soon",
+  },
 ];
 
 export default function ServicesGrid() {

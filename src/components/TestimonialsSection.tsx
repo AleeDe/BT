@@ -15,37 +15,59 @@ type Testimonial = {
   rating: number;
 };
 
+const REVIEW_WORD_LIMIT = 30;
+
+function truncateWords(text: string, limit: number): string {
+  const words = text.trim().split(/\s+/);
+  if (words.length <= limit) {
+    return text;
+  }
+  return `${words.slice(0, limit).join(" ")}...`;
+}
+
+function hasMoreThanWords(text: string, limit: number): boolean {
+  return text.trim().split(/\s+/).length > limit;
+}
+
 const testimonials: Testimonial[] = [
   {
-    name: "Sarah Jenkins",
-    role: "CTO",
-    company: "FinTech Elevate",
-    website: "https://example.com/fintech",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop",
-    review: "BabulTech completely revamped our CRM architecture. The pay-as-you-go model and their rapid execution saved us months of development time and integrated flawlessly with our existing stack.",
+    name: "Oren Falkovitz",
+    role: "Climate Storyteller & Marketer",
+    company: "Climate-focused Organizations",
+    image: "/client1.jpg",
+    review:
+      "At a high level, to me, Hasan is a problem-solver. In the several years I worked with Hasan helped our organization become more efficient and effective. Whenever I went to Hasan with a request, he either had the answer or would say the following - Give me some time, and I'll figure it out. This meant that he would take the time to first understand the request, then research and assess, and then propose a solution, or counter-propose the situation. In doing so, Hasan applied his approach to development, which is user-first. Meaning, he prioritized our users experience for whatever he developed, with an objective of reducing as much manual work possible, while maintaining the integrity of the systems he developed and supported. I sincerely enjoyed my time working with you!",
     rating: 5
   },
   {
-    name: "David Chen",
-    role: "Operations Director",
-    company: "Global Logistics",
-    website: "https://example.com/logistics",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600&auto=format&fit=crop",
-    review: "We had critical bottlenecks in our data pipelines. BabulTech provided extremely smart solutions that scaled our throughput intelligently. Their team works like an extension of our own.",
+    name: "Faizan ul Haq",
+    role: "Director of Marketing",
+    company: "Bentham Science",
+    image: "/client2.jpg",
+    review:
+      "I highly recommend Hasan Shamsi for any opportunities that may be available. Hasan is a highly skilled professional with exceptional expertise, professionalism, and work ethic. He consistently produces high-quality work and is an excellent communicator who is able to effectively convey complex ideas to both technical and non-technical stakeholders. His unique combination of technical expertise and interpersonal skills makes him a valuable asset to any team.",
     rating: 5
   },
   {
-    name: "Emily Rodriguez",
-    role: "VP of Engineering",
-    company: "HealthSync",
-    website: "https://example.com/healthsync",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=600&auto=format&fit=crop",
-    review: "Their technical expertise is unmatched. From securing our infrastructure to delivering a blazing fast frontend, the level of precision and collaborative partnership was phenomenal.",
+    name: "Sam Mendelsohn",
+    role: "President",
+    company: "Client Leadership",
+    image: "/client3.jpg",
+    review:
+      "Hasan was great at working with us to ensure our SalesForce was optimized for our business processes. He really ensured we were up and running and working as effectively as we could. Thanks Hasan!",
     rating: 5
   }
 ];
 
-function TestimonialCard({ testimonial, index }: { testimonial: Testimonial; index: number }) {
+function TestimonialCard({
+  testimonial,
+  index,
+  onOpenFullReview,
+}: {
+  testimonial: Testimonial;
+  index: number;
+  onOpenFullReview: (testimonial: Testimonial) => void;
+}) {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -111,8 +133,20 @@ function TestimonialCard({ testimonial, index }: { testimonial: Testimonial; ind
               ))}
             </div>
             <p className="text-body text-sm leading-relaxed mb-6 border-t border-white/10 pt-4 italic">
-              &ldquo;{testimonial.review}&rdquo;
+              &ldquo;{truncateWords(testimonial.review, REVIEW_WORD_LIMIT)}&rdquo;
             </p>
+            {hasMoreThanWords(testimonial.review, REVIEW_WORD_LIMIT) && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onOpenFullReview(testimonial);
+                }}
+                className="text-sm font-semibold text-primary hover:underline"
+              >
+                Read full review
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -128,6 +162,8 @@ function TestimonialCard({ testimonial, index }: { testimonial: Testimonial; ind
 }
 
 export function TestimonialsSection() {
+  const [activeReview, setActiveReview] = useState<Testimonial | null>(null);
+
   return (
     <section className="py-24 relative overflow-hidden bg-black/20">
       <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] -translate-y-1/2 -z-10 pointer-events-none" />
@@ -156,10 +192,53 @@ export function TestimonialsSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {testimonials.map((testimonial, i) => (
-            <TestimonialCard key={i} testimonial={testimonial} index={i} />
+            <TestimonialCard
+              key={i}
+              testimonial={testimonial}
+              index={i}
+              onOpenFullReview={setActiveReview}
+            />
           ))}
         </div>
       </div>
+
+      {activeReview && (
+        <div
+          className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setActiveReview(null)}
+        >
+          <div
+            className="w-full max-w-2xl rounded-2xl border border-white/15 bg-background/95 p-6 md:p-8 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-start justify-between gap-4 mb-4">
+              <div>
+                <h3 className="text-2xl font-bold text-foreground">{activeReview.name}</h3>
+                <p className="text-sm text-body mt-1">
+                  {activeReview.role} @ {activeReview.company}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setActiveReview(null)}
+                className="text-sm font-semibold text-primary hover:underline"
+              >
+                Close
+              </button>
+            </div>
+
+            <div className="flex gap-1 mb-4">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className={`w-4 h-4 ${i < activeReview.rating ? "text-primary fill-yellow-400" : "text-gray-600"}`} />
+              ))}
+            </div>
+
+            <p className="text-body leading-relaxed italic max-h-[60vh] overflow-y-auto pr-1">
+              &ldquo;{activeReview.review}&rdquo;
+            </p>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

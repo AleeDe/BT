@@ -56,13 +56,13 @@ export function Navigation() {
                       <p className="text-xs text-body line-clamp-2 mt-0.5">Solving bottlenecks via powerful strategic Technical Partnerships</p>
                     </div>
                   </a>
-                  <a href="https://apex-accelerator.com" target="_blank" rel="noopener noreferrer" className="group/item flex items-center gap-3 rounded-xl px-3 py-3 hover:bg-white/5 transition">
+                  <a href="https://cloud-qube.vercel.app/" target="_blank" rel="noopener noreferrer" className="group/item flex items-center gap-3 rounded-xl px-3 py-3 hover:bg-white/5 transition">
                   <div className="h-9 w-9 rounded-xl bg-white/5 border border-white/10 grid place-items-center">
                     <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_10px_rgba(16,185,129,0.6)]" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-sm font-semibold text-gray-100">Apex-Accelerator</span>
+                      <span className="text-sm font-semibold text-gray-100">CloudQube</span>
                       <ExternalLink size={12} className="text-body group-hover/item:text-primary transition-colors" />
                     </div>
                     <p className="text-xs text-body line-clamp-1">Enterprise CRM Solutions</p>
@@ -80,6 +80,19 @@ export function Navigation() {
                     <p className="text-xs text-body line-clamp-1">Technical Partner</p>
                   </div>
                 </a>
+
+                <div className="group/item flex items-center gap-3 rounded-xl px-3 py-3 mt-1 border border-white/10 bg-white/[0.03]">
+                  <div className="h-9 w-9 rounded-xl bg-white/5 border border-white/10 grid place-items-center">
+                    <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_10px_rgba(16,185,129,0.6)]" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-sm font-semibold text-gray-100">AI & Data Science</span>
+                      <span className="text-[10px] uppercase tracking-wider text-primary font-bold">Coming Soon</span>
+                    </div>
+                    <p className="text-xs text-body line-clamp-1">Advanced AI solutions and analytics services</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -127,12 +140,16 @@ export function Navigation() {
                     <a href="/services" className="flex items-center gap-2 text-body py-3 min-h-[44px] hover:text-primary transition-colors rounded-lg hover:bg-white/5 px-2">
                        View Our Services
                      </a>
-                     <a href="https://apex-accelerator.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-body py-3 min-h-[44px] hover:text-primary transition-colors rounded-lg hover:bg-white/5 px-2">
-                     Apex-Accelerator <ExternalLink size={14}/>
+                     <a href="https://cloud-qube.vercel.app/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-body py-3 min-h-[44px] hover:text-primary transition-colors rounded-lg hover:bg-white/5 px-2">
+                     CloudQube <ExternalLink size={14}/>
                    </a>
                    <a href="https://shiftdeploy.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-body py-3 min-h-[44px] hover:text-primary transition-colors rounded-lg hover:bg-white/5 px-2">
                      ShiftDeploy <ExternalLink size={14}/>
                    </a>
+                   <div className="flex items-center justify-between gap-2 text-body py-3 min-h-[44px] rounded-lg bg-white/[0.03] border border-white/10 px-2">
+                     <span>AI & Data Science</span>
+                     <span className="text-[10px] uppercase tracking-wider text-primary font-bold">Coming Soon</span>
+                   </div>
                 </div>
               </div>
               
