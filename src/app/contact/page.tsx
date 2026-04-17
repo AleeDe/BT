@@ -109,21 +109,21 @@ export default function ContactPage() {
       icon: <Phone className="w-6 h-6" />,
       title: "Call Us",
       description: "Mon-Fri from 8am to 5pm.",
-      value: "+1 (555) 000-0000",
+      value: "+92 310 2700403",
       color: "from-primary to-primary"
     },
     {
       icon: <Mail className="w-6 h-6" />,
       title: "Chat with us",
       description: "Our friendly team is here to help.",
-      value: "hello@babultech.com",
+      value: "contact@babultech.com",
       color: "from-primary to-primary"
     },
     {
       icon: <MapPin className="w-6 h-6" />,
       title: "Visit us",
       description: "Come say hello at our HQ.",
-      value: "100 Innovation Drive, Tech City, TC 10010",
+      value: "Skardu, Pakistan",
       color: "from-primary to-primary"
     }
   ];

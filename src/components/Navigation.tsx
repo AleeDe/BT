@@ -40,18 +40,19 @@ export function Navigation() {
           
           <div className="relative group">
             <button className="text-sm font-medium text-body hover:text-foreground transition-colors duration-200 py-6 focus:outline-none flex items-center gap-1.5">
-              Services
+              Our Services
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:rotate-180 transition-transform duration-200"><path d="m6 9 6 6 6-6"/></svg>
             </button>
             <div className="absolute top-[80%] left-0 w-72 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
               <div className="mt-2 rounded-2xl bg-[#020617] border border-white/10 shadow-2xl overflow-hidden flex flex-col p-2">
-                    <a href="/services" className="group/item flex items-center gap-3 rounded-xl px-3 py-3 hover:bg-white/5 transition mb-1">
+                    <a href="https://core-services-kappa.vercel.app/" target="_blank" rel="noopener noreferrer" className="group/item flex items-center gap-3 rounded-xl px-3 py-3 hover:bg-white/5 transition mb-1">
                     <div className="h-9 w-9 rounded-xl bg-white/5 border border-white/10 grid place-items-center">
                       <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_10px_rgba(168,85,247,0.6)]" />
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center justify-between gap-2">
-                        <span className="text-sm font-semibold text-gray-100">View Our Services</span>
+                        <span className="text-sm font-semibold text-gray-100">Our Core Services</span>
+                        <ExternalLink size={12} className="text-body group-hover/item:text-primary transition-colors" />
                       </div>
                       <p className="text-xs text-body line-clamp-2 mt-0.5">Solving bottlenecks via powerful strategic Technical Partnerships</p>
                     </div>
@@ -68,19 +69,6 @@ export function Navigation() {
                     <p className="text-xs text-body line-clamp-1">Enterprise CRM Solutions</p>
                   </div>
                 </a>
-                <a href="https://shiftdeploy.com" target="_blank" rel="noopener noreferrer" className="group/item flex items-center gap-3 rounded-xl px-3 py-3 hover:bg-white/5 transition mt-1">
-                   <div className="h-9 w-9 rounded-xl bg-white/5 border border-white/10 grid place-items-center">
-                    <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_10px_rgba(16,185,129,0.6)]" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-sm font-semibold text-gray-100">ShiftDeploy</span>
-                      <ExternalLink size={12} className="text-body group-hover/item:text-primary transition-colors" />
-                    </div>
-                    <p className="text-xs text-body line-clamp-1">Technical Partner</p>
-                  </div>
-                </a>
-
                 <div className="group/item flex items-center gap-3 rounded-xl px-3 py-3 mt-1 border border-white/10 bg-white/[0.03]">
                   <div className="h-9 w-9 rounded-xl bg-white/5 border border-white/10 grid place-items-center">
                     <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_10px_rgba(16,185,129,0.6)]" />
@@ -137,14 +125,11 @@ export function Navigation() {
               <div className="px-3 py-2">
                 <p className="text-body text-xs uppercase tracking-wider mb-2 font-semibold">Services</p>
                 <div className="pl-3 space-y-1 border-l-2 border-white/10">
-                    <a href="/services" className="flex items-center gap-2 text-body py-3 min-h-[44px] hover:text-primary transition-colors rounded-lg hover:bg-white/5 px-2">
-                       View Our Services
+                      <a href="https://core-services-kappa.vercel.app/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-body py-3 min-h-[44px] hover:text-primary transition-colors rounded-lg hover:bg-white/5 px-2">
+                        Our Core Services <ExternalLink size={14}/>
                      </a>
                      <a href="https://cloud-qube.vercel.app/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-body py-3 min-h-[44px] hover:text-primary transition-colors rounded-lg hover:bg-white/5 px-2">
                      CloudQube <ExternalLink size={14}/>
-                   </a>
-                   <a href="https://shiftdeploy.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-body py-3 min-h-[44px] hover:text-primary transition-colors rounded-lg hover:bg-white/5 px-2">
-                     ShiftDeploy <ExternalLink size={14}/>
                    </a>
                    <div className="flex items-center justify-between gap-2 text-body py-3 min-h-[44px] rounded-lg bg-white/[0.03] border border-white/10 px-2">
                      <span>AI & Data Science</span>

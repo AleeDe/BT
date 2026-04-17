@@ -283,12 +283,14 @@ export function HeroSection() {
                 </span>
                      </Link>
               
-                     <Link
-                        href="/services"
+                               <a
+                                    href="https://core-services-kappa.vercel.app/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                 className="group inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700/50 bg-slate-800/30 px-8 py-4 sm:min-h-[56px] text-base font-semibold text-slate-300 hover:bg-slate-800 hover:text-foreground transition-all duration-300 hover:border-slate-600 hover:-translate-y-1 w-full sm:w-auto"
               >
-                <Zap className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" /> Explore Solutions
-                     </Link>
+                        <Zap className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" /> Our Core Services
+                               </a>
             </div>
 
             {/* Social Proof & Trust Badges */}

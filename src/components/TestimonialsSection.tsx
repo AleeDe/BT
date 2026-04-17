@@ -30,31 +30,31 @@ function hasMoreThanWords(text: string, limit: number): boolean {
 }
 
 const testimonials: Testimonial[] = [
-  {
-    name: "Oren Falkovitz",
-    role: "Climate Storyteller & Marketer",
-    company: "Climate-focused Organizations",
-    image: "/client1.jpg",
-    review:
-      "At a high level, to me, Hasan is a problem-solver. In the several years I worked with Hasan helped our organization become more efficient and effective. Whenever I went to Hasan with a request, he either had the answer or would say the following - Give me some time, and I'll figure it out. This meant that he would take the time to first understand the request, then research and assess, and then propose a solution, or counter-propose the situation. In doing so, Hasan applied his approach to development, which is user-first. Meaning, he prioritized our users experience for whatever he developed, with an objective of reducing as much manual work possible, while maintaining the integrity of the systems he developed and supported. I sincerely enjoyed my time working with you!",
-    rating: 5
-  },
-  {
-    name: "Faizan ul Haq",
-    role: "Director of Marketing",
-    company: "Bentham Science",
-    image: "/client2.jpg",
-    review:
-      "I highly recommend Hasan Shamsi for any opportunities that may be available. Hasan is a highly skilled professional with exceptional expertise, professionalism, and work ethic. He consistently produces high-quality work and is an excellent communicator who is able to effectively convey complex ideas to both technical and non-technical stakeholders. His unique combination of technical expertise and interpersonal skills makes him a valuable asset to any team.",
-    rating: 5
-  },
+{
+  name: "Oren Falkovitz",
+  role: "Climate Storyteller & Marketer",
+  company: "Climate-focused Organizations",
+  image: "/client1.jpg",
+  review:
+    "At a high level, BabulTech stands out as a true problem-solving partner. Throughout our collaboration, they played a key role in making our organization more efficient and effective. Whenever we brought a request or challenge to them, they either had a solution ready or took the time to fully understand the requirement, research it, and come back with a well-thought-out approach.\n\nWhat sets BabulTech apart is their user-first mindset. They consistently prioritize the end-user experience while focusing on reducing manual work and improving overall system efficiency. At the same time, they maintain the reliability and integrity of the systems they build and support.\n\nWorking with BabulTech has been a great experience, and we highly value their ability to deliver practical, impactful solutions",
+  rating: 5
+},
+{
+  name: "Faizan ul Haq",
+  role: "Director of Marketing",
+  company: "Bentham Science",
+  image: "/client2.jpg",
+  review:
+    "I highly recommend BabulTech for any opportunities or projects. They are a highly skilled and professional team with strong expertise and an excellent work ethic. They consistently deliver high-quality solutions and communicate effectively, making even complex ideas easy to understand for both technical and non-technical stakeholders.\n\nTheir unique combination of technical capability and strong collaboration skills makes BabulTech a valuable partner for any organization",
+  rating: 5
+},
   {
     name: "Sam Mendelsohn",
     role: "President",
     company: "Client Leadership",
     image: "/client3.jpg",
     review:
-      "Hasan was great at working with us to ensure our SalesForce was optimized for our business processes. He really ensured we were up and running and working as effectively as we could. Thanks Hasan!",
+      "BabulTech was excellent to work with in ensuring our Salesforce was fully optimized for our business processes. They made sure everything was set up smoothly and helped us operate as efficiently as possible. Great experience working with them!",
     rating: 5
   }
 ];

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, Phone, MapPin, Twitter, Linkedin, Github, ArrowRight } from "lucide-react";
+import { Mail, Phone, MapPin, Twitter, Linkedin, Github, Facebook, ArrowRight } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -26,6 +26,9 @@ export default function Footer() {
               Delivering certified expertise and rapid resolution across enterprise IT, CRM implementation, and functioning as your strategic technical partner.
             </p>
             <div className="flex space-x-4">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-foreground transition-all duration-300" aria-label="Facebook">
+                <Facebook className="w-5 h-5" />
+              </a>
               <a href="#" className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-foreground transition-all duration-300">
                 <Twitter className="w-5 h-5" />
               </a>
@@ -43,28 +46,28 @@ export default function Footer() {
             <h3 className="text-foreground font-semibold mb-6">Expertise</h3>
             <ul className="space-y-4">
               <li>
-                <Link href="/services#enterprise-it" className="text-sm text-slate-400 hover:text-primary transition-colors flex items-center group">
+                <a href="https://core-services-kappa.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-sm text-slate-400 hover:text-primary transition-colors flex items-center group">
                   <ArrowRight className="w-4 h-4 mr-2 opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                   Enterprise IT Solutions
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="/services#crm" className="text-sm text-slate-400 hover:text-primary transition-colors flex items-center group">
+                <a href="https://core-services-kappa.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-sm text-slate-400 hover:text-primary transition-colors flex items-center group">
                   <ArrowRight className="w-4 h-4 mr-2 opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                   CRM Implementation
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="/services" className="text-sm text-slate-400 hover:text-primary transition-colors flex items-center group">
+                <a href="https://core-services-kappa.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-sm text-slate-400 hover:text-primary transition-colors flex items-center group">
                   <ArrowRight className="w-4 h-4 mr-2 opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                   Technical Partnership
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="/services#cloud" className="text-sm text-slate-400 hover:text-primary transition-colors flex items-center group">
+                <a href="https://core-services-kappa.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-sm text-slate-400 hover:text-primary transition-colors flex items-center group">
                   <ArrowRight className="w-4 h-4 mr-2 opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                   Cloud Infrastructure
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
@@ -80,7 +83,7 @@ export default function Footer() {
                 <Link href="/case-studies" className="text-sm text-slate-400 hover:text-primary transition-colors">Our Case Studies</Link>
               </li>
               <li>
-                <Link href="/services" className="text-sm text-slate-400 hover:text-primary transition-colors">Our Services</Link>
+                <a href="https://core-services-kappa.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-sm text-slate-400 hover:text-primary transition-colors">Our Core Services</a>
               </li>
               <li>
                 <Link href="/industries" className="text-sm text-slate-400 hover:text-primary transition-colors">Industries</Link>
@@ -94,15 +97,15 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start">
                 <MapPin className="w-5 h-5 text-primary mr-3 mt-0.5 shrink-0" />
-                <span className="text-sm text-slate-400">123 Tech Avenue, Innovation District<br />San Francisco, CA 94105</span>
+                <span className="text-sm text-slate-400">Skardu, Pakistan</span>
               </li>
               <li className="flex items-center">
                 <Phone className="w-5 h-5 text-primary mr-3 shrink-0" />
-                <a href="tel:+1234567890" className="text-sm text-slate-400 hover:text-foreground transition-colors">+1 (555) 123-4567</a>
+                <a href="tel:+923102700403" className="text-sm text-slate-400 hover:text-foreground transition-colors">+92 310 2700403</a>
               </li>
               <li className="flex items-center">
                 <Mail className="w-5 h-5 text-primary mr-3 shrink-0" />
-                <a href="mailto:hello@babultech.com" className="text-sm text-slate-400 hover:text-foreground transition-colors">hello@babultech.com</a>
+                <a href="mailto:contact@babultech.com" className="text-sm text-slate-400 hover:text-foreground transition-colors">contact@babultech.com</a>
               </li>
             </ul>
           </div>
