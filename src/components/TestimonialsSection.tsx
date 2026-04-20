@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Star, ExternalLink } from "lucide-react";
@@ -10,7 +9,6 @@ type Testimonial = {
   role: string;
   company: string;
   website?: string;
-  image: string;
   review: string;
   rating: number;
 };
@@ -29,12 +27,20 @@ function hasMoreThanWords(text: string, limit: number): boolean {
   return text.trim().split(/\s+/).length > limit;
 }
 
+function getCompanyInitials(company: string): string {
+  return company
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word[0]?.toUpperCase() ?? "")
+    .join("");
+}
+
 const testimonials: Testimonial[] = [
 {
   name: "Oren Falkovitz",
   role: "Climate Storyteller & Marketer",
   company: "Climate-focused Organizations",
-  image: "/client1.jpg",
   review:
     "At a high level, BabulTech stands out as a true problem-solving partner. Throughout our collaboration, they played a key role in making our organization more efficient and effective. Whenever we brought a request or challenge to them, they either had a solution ready or took the time to fully understand the requirement, research it, and come back with a well-thought-out approach.\n\nWhat sets BabulTech apart is their user-first mindset. They consistently prioritize the end-user experience while focusing on reducing manual work and improving overall system efficiency. At the same time, they maintain the reliability and integrity of the systems they build and support.\n\nWorking with BabulTech has been a great experience, and we highly value their ability to deliver practical, impactful solutions",
   rating: 5
@@ -43,7 +49,6 @@ const testimonials: Testimonial[] = [
   name: "Faizan ul Haq",
   role: "Director of Marketing",
   company: "Bentham Science",
-  image: "/client2.jpg",
   review:
     "I highly recommend BabulTech for any opportunities or projects. They are a highly skilled and professional team with strong expertise and an excellent work ethic. They consistently deliver high-quality solutions and communicate effectively, making even complex ideas easy to understand for both technical and non-technical stakeholders.\n\nTheir unique combination of technical capability and strong collaboration skills makes BabulTech a valuable partner for any organization",
   rating: 5
@@ -52,7 +57,6 @@ const testimonials: Testimonial[] = [
     name: "Sam Mendelsohn",
     role: "President",
     company: "Client Leadership",
-    image: "/client3.jpg",
     review:
       "BabulTech was excellent to work with in ensuring our Salesforce was fully optimized for our business processes. They made sure everything was set up smoothly and helped us operate as efficiently as possible. Great experience working with them!",
     rating: 5
@@ -69,6 +73,7 @@ function TestimonialCard({
   onOpenFullReview: (testimonial: Testimonial) => void;
 }) {
   const [expanded, setExpanded] = useState(false);
+  const companyInitials = getCompanyInitials(testimonial.company);
 
   return (
     <motion.div
@@ -81,15 +86,17 @@ function TestimonialCard({
       onMouseEnter={() => setExpanded(true)}
       onMouseLeave={() => setExpanded(false)}
     >
-      {/* Background Image */}
+      {/* Background Logo Surface */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <Image
-          src={testimonial.image}
-          alt={testimonial.name}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className={`w-full h-full object-cover transition-transform duration-700 ease-out ${expanded ? "scale-110 opacity-20" : "opacity-50"}`}
+        <div
+          className={`absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.14),rgba(255,255,255,0.02)_45%,transparent_70%)] transition-all duration-700 ${expanded ? "scale-110" : "scale-100"}`}
         />
+        <div
+          className={`absolute -right-6 -top-8 text-[8rem] font-black text-white/10 leading-none tracking-tighter transition-all duration-700 ${expanded ? "opacity-60 scale-110" : "opacity-35"}`}
+          aria-hidden="true"
+        >
+          {companyInitials}
+        </div>
         <div className={`absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent transition-opacity duration-500 ${expanded ? "opacity-90" : "opacity-80"}`}></div>
       </div>
 
@@ -97,8 +104,10 @@ function TestimonialCard({
       <div className="absolute inset-0 p-6 flex flex-col justify-end">
         {/* Visible Text */}
         <div className={`relative z-10 transform transition-transform duration-500 ease-out ${expanded ? "-translate-y-4" : ""}`}>
-          <div className={`w-16 h-16 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center p-1 mb-6 transition-all duration-500 ${expanded ? "opacity-100 -translate-y-2" : "opacity-0 translate-y-4"}`}>
-            <Image src={testimonial.image} alt={testimonial.name} width={64} height={64} className="w-full h-full object-cover rounded-xl" />
+          <div className={`w-16 h-16 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center mb-6 transition-all duration-500 ${expanded ? "opacity-100 -translate-y-2" : "opacity-0 translate-y-4"}`}>
+            <span className="text-xl font-extrabold tracking-tight text-foreground" aria-label={`${testimonial.company} logo`}>
+              {companyInitials}
+            </span>
           </div>
 
           <h3 className={`text-2xl font-bold text-foreground mb-1 transition-colors duration-300 ${expanded ? "text-primary" : ""}`}>{testimonial.name}</h3>

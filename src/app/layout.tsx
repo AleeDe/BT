@@ -17,6 +17,11 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "BabulTech | Certified Expertise. Rapid Resolution.",
   description: "Enterprise IT Solutions, CRM Implementation, and Technical Partnership",
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 64" role="img" aria-label="Boomi logo">
+  <rect x="0" y="0" width="220" height="64" rx="14" fill="#0d2235"/>
+  <g transform="translate(18 18)">
+    <circle cx="8" cy="8" r="8" fill="#F58220"/>
+    <circle cx="26" cy="8" r="8" fill="#F58220"/>
+    <circle cx="44" cy="8" r="8" fill="#F58220"/>
+  </g>
+  <text x="82" y="40" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Boomi</text>
+</svg>

@@ -1,57 +1,41 @@
 ﻿"use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import {
-  Landmark,
-  ShoppingCart,
-  Factory,
-  HeartPulse,
-  Globe,
-  ArrowRight,
-} from "lucide-react";
-import Link from "next/link"; // ✅ Fixed: Next.js Link instead of react-router-dom
-
-const industries = [
-  {
-    key: "banking",
-    title: "Banking & Financial Services",
-    tabLabel: "Banking & Finance",
-    icon: Landmark,
-    description:
-      "Secure, compliant revenue workflows and automated systems for regulated environments.",
-  },
-  {
-    key: "retail",
-    title: "Retail & eCommerce",
-    tabLabel: "Retail & eCommerce",
-    icon: ShoppingCart,
-    description:
-      "Conversion-focused systems designed to scale with growth, demand, and operations.",
-  },
-  {
-    key: "manufacturing",
-    title: "Manufacturing",
-    tabLabel: "Manufacturing",
-    icon: Factory,
-    description:
-      "Systems that connect sales, ops, and fulfillment without bottlenecks or manual reporting.",
-  }
-];
-
-// ✅ Auto order like Banner
-const ORDER = ["banking", "retail", "manufacturing"];
+import Image from "next/image";
+import { useReducedMotion } from "framer-motion";
+import { industries, INDUSTRY_ORDER } from "@/components/industries/industriesData";
+import { IndustriesHeader } from "@/components/industries/IndustriesHeader";
+import { IndustriesTabs } from "@/components/industries/IndustriesTabs";
+import { IndustriesContentCard } from "@/components/industries/IndustriesContentCard";
+import { IndustriesFooterLink } from "@/components/industries/IndustriesFooterLink";
 
 export function IndustriesSection() {
   const reduce = useReducedMotion();
-  const [active, setActive] = useState("banking");
+  const homepageOrder = INDUSTRY_ORDER.slice(0, 3);
+  const homepageIndustries = industries.filter((item) => homepageOrder.includes(item.key));
+  const featuredTechnologies = [
+    { name: "Flutter", src: "/tech-logos/flutter.svg", url: "https://flutter.dev" },
+    { name: "n8n", src: "/tech-logos/n8n.svg", url: "https://n8n.io" },
+    { name: "Next.js", src: "/tech-logos/nextdotjs.svg", url: "https://nextjs.org" },
+    { name: "TypeScript", src: "/tech-logos/typescript.svg", url: "https://www.typescriptlang.org" },
+    { name: "Node.js", src: "/tech-logos/nodedotjs.svg", url: "https://nodejs.org" },
+    { name: "Python", src: "/tech-logos/python.svg", url: "https://www.python.org" },
+    { name: "PostgreSQL", src: "/tech-logos/postgresql.svg", url: "https://www.postgresql.org" },
+    { name: "Docker", src: "/tech-logos/docker.svg", url: "https://www.docker.com" },
+    { name: "Kubernetes", src: "/tech-logos/kubernetes.svg", url: "https://kubernetes.io" },
+    { name: "AWS", src: "/tech-logos/aws.svg", url: "https://aws.amazon.com" },
+    { name: "Google Cloud", src: "/tech-logos/googlecloud.svg", url: "https://cloud.google.com" },
+    { name: "OpenAI", src: "/tech-logos/openai.svg", url: "https://openai.com" },
+    { name: "LangChain", src: "/tech-logos/langchain.svg", url: "https://www.langchain.com" },
+    { name: "Redis", src: "/tech-logos/redis.svg", url: "https://redis.io" },
+  ];
+  const [active, setActive] = useState(homepageOrder[0] ?? "banking");
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const current = useMemo(
-    () => industries.find((x) => x.key === active) || industries[0],
-    [active]
+    () => homepageIndustries.find((x) => x.key === active) || homepageIndustries[0],
+    [active, homepageIndustries]
   );
-  const Icon = current.icon;
 
   // ✅ Auto rotate (Banner jaisa)
   const startAuto = () => {
@@ -59,8 +43,8 @@ export function IndustriesSection() {
 
     intervalRef.current = setInterval(() => {
       setActive((prev) => {
-        const idx = ORDER.indexOf(prev);
-        return ORDER[(idx + 1) % ORDER.length];
+        const idx = homepageOrder.indexOf(prev);
+        return homepageOrder[(idx + 1) % homepageOrder.length];
       });
     }, 4200); // ✅ slow/professional timing (4.2s)
   };
@@ -86,133 +70,51 @@ export function IndustriesSection() {
       <div className="absolute -left-1/4 top-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-5xl mx-auto relative z-10">
-        {/* Heading */}
-        <div className="text-center">
-          <p className="text-[11px] font-extrabold tracking-[0.28em] text-primary uppercase">
-            Industries We Serve
-          </p>
-
-          <h2 className="mt-3 text-3xl sm:text-5xl font-black text-foreground">
-            Find the Right{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary">
-              Solution
-            </span>{" "}
-            for Your Industry
-          </h2>
-
-          <p className="mt-4 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto">
-            Tailored architectures for regulated, complex, and growth-focused sectors ensuring scale and security.
-          </p>
-        </div>
+        <IndustriesHeader />
 
         {/* Widget shell */}
         <div className="mt-12 rounded-[32px] bg-slate-900/40 backdrop-blur-xl border border-slate-800/80 shadow-[0_24px_80px_-20px_rgba(16,185,129,0.1)] p-4 sm:p-8">
-          {/* Tabs */}
-          <div className="flex items-center justify-start md:justify-center gap-2 sm:gap-3 overflow-x-auto pb-3 sm:pb-4 scrollbar-hide">
-            {industries.map((t) => {
-              const TIcon = t.icon;
-              const isActive = t.key === active;
+          <IndustriesTabs items={homepageIndustries} active={active} onTab={onTab} />
+          <IndustriesContentCard
+            activeKey={active}
+            current={current}
+            items={homepageIndustries}
+            reduceMotion={!!reduce}
+            onTab={onTab}
+          />
+          <IndustriesFooterLink />
+        </div>
+      </div>
 
-              return (
-                <button
-                  key={t.key}
-                  onClick={() => onTab(t.key)}
-                  className={[
-                    "relative flex items-center gap-2 sm:gap-3 rounded-2xl px-3 sm:px-5 py-3 sm:py-3.5 min-h-[44px]",
-                    "transition-all duration-300 border whitespace-nowrap text-left",
-                    isActive ? "bg-slate-800 border-primary/50 shadow-[0_0_15px_rgba(16,185,129,0.25)] text-foreground"
-                      : "bg-slate-800/30 border-slate-700/50 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200",
-                  ].join(" ")}
+      <div className="relative z-10 mt-8 left-1/2 w-screen -translate-x-1/2 px-4 sm:px-6 lg:px-0">
+        <div className="rounded-[28px] lg:rounded-none bg-slate-900/35 backdrop-blur-xl border border-slate-800/80 lg:border-x-0 shadow-[0_20px_70px_-25px_rgba(16,185,129,0.18)] p-5 sm:p-7 overflow-hidden">
+          <h3 className="text-lg sm:text-xl font-black text-foreground text-center mb-5 sm:mb-6">
+            Powered by <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary">Industry-Leading Technologies</span>
+          </h3>
+
+          <div className="enterprise-marquee relative w-full overflow-hidden">
+            <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-r from-slate-900 via-transparent to-slate-900 w-full" />
+
+            <div className="enterprise-marquee-track flex whitespace-nowrap gap-5 sm:gap-6 items-center pl-6 sm:pl-8 pr-6 sm:pr-8 opacity-100 transition-opacity duration-500">
+              {[...featuredTechnologies, ...featuredTechnologies, ...featuredTechnologies].map((technology, idx) => (
+                <a
+                  key={`${technology.name}-${idx}`}
+                  href={technology.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-slate-700/80 bg-slate-950/80 px-3 py-1.5 text-xs sm:text-sm font-semibold text-slate-200 hover:text-foreground hover:border-primary/50 transition-colors"
                 >
-                  <span
-                    className={[
-                      "h-8 w-8 sm:h-10 sm:w-10 rounded-xl sm:rounded-2xl border grid place-items-center shrink-0 transition-colors",
-                      isActive
-                        ? "bg-primary/20 border-primary/30"
-                        : "bg-slate-900 border-slate-700",
-                    ].join(" ")}
-                  >
-                    <TIcon
-                      className={[
-                        "h-5 w-5",
-                        isActive ? "text-primary" : "text-slate-500",
-                      ].join(" ")}
-                    />
-                  </span>
-
-                  <span className="text-[12px] sm:text-[14px] font-bold leading-tight">
-                    {t.tabLabel}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Content Card */}
-          <motion.div
-            key={active}
-            initial={reduce ? false : { opacity: 0, y: 15 }}
-            animate={reduce ? {} : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="mt-6 rounded-3xl bg-slate-800/40 border border-slate-700/50 shadow-2xl p-6 sm:p-8 relative overflow-hidden group"
-          >
-            {/* Subtle glow inside the card */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] pointer-events-none transition-opacity duration-700 opacity-50 group-hover:opacity-100"></div>
-
-            <div className="flex items-start gap-4 relative z-10">
-              <div className="h-14 w-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
-                <Icon className="h-7 w-7 text-primary" />
-              </div>
-
-              <div>
-                <h3 className="text-xl sm:text-2xl font-bold text-foreground">
-                  {current.title}
-                </h3>
-                <p className="mt-2 text-base text-slate-400 leading-relaxed max-w-xl">
-                  {current.description}
-                </p>
-              </div>
-            </div>
-
-            {/* CTA Button */}
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-6 relative z-10">
-              <Link
-                href={`/industries`}
-                className="group relative inline-flex items-center justify-center gap-2 rounded-2xl bg-primary text-foreground px-7 py-3.5 font-bold overflow-hidden transition-all hover:-translate-y-0.5 shadow-[0_0_20px_rgba(16,185,129,0.4)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] w-full sm:w-auto"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <span className="relative z-10">Explore {current.title} Details</span>
-                <ArrowRight className="h-4 w-4 relative z-10 group-hover:translate-x-1 transition-transform" />
-              </Link>
-
-              {/* ✅ Dots */}
-              <div className="flex gap-2.5 bg-slate-950/60 border border-slate-800 px-4 py-3 rounded-full flex-shrink-0 shadow-inner">
-                {industries.map((d) => (
-                  <button
-                    key={d.key}
-                    onClick={() => onTab(d.key)}
-                    aria-label={`Go to ${d.title}`}
-                    className={[
-                      "h-2.5 w-2.5 rounded-full transition-all duration-300",
-                      d.key === active
-                        ? "bg-primary scale-125 shadow-[0_0_8px_rgba(16,185,129,0.6)]"
-                        : "bg-slate-700 hover:bg-background0",
-                    ].join(" ")}
+                  <Image
+                    src={technology.src}
+                    alt={`${technology.name} logo`}
+                    width={20}
+                    height={20}
+                    className="h-4 w-4 object-contain brightness-0 invert"
                   />
-                ))}
-              </div>
+                  {technology.name}
+                </a>
+              ))}
             </div>
-          </motion.div>
-
-          {/* View All Industries Link */}
-          <div className="mt-8 flex justify-center relative z-10">
-            <Link
-              href="/industries"
-              className="group inline-flex items-center gap-2 rounded-full border border-slate-700/50 bg-slate-800/30 px-6 py-2.5 text-sm font-semibold text-slate-300 hover:bg-slate-800 hover:text-foreground transition-all duration-300 hover:border-slate-600"
-            >
-              View All Industries
-              <ArrowRight className="h-4 w-4 text-slate-500 group-hover:text-primary group-hover:translate-x-1 transition-all" />
-            </Link>
           </div>
         </div>
       </div>
