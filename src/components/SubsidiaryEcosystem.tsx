@@ -8,7 +8,8 @@ const serviceCards = [
     title: 'Our Core Services',
     description:
       'End-to-end execution across strategy, architecture, delivery, and optimization to remove business bottlenecks fast.',
-    href: 'https://core-services-kappa.vercel.app/',
+    href: '/core-services',
+    external: false,
     icon: Sparkles,
     accentClass: 'from-primary/45 via-primary/20 to-transparent',
     chip: 'Flagship',
@@ -17,7 +18,8 @@ const serviceCards = [
     title: 'CloudQube',
     description:
       'Enterprise CRM systems designed for adoption, performance, and measurable outcomes across sales and operations.',
-    href: 'https://cloud-qube.vercel.app/',
+    href: '/cloud-qube',
+    external: false,
     icon: Cloud,
     accentClass: 'from-cyan-400/40 via-primary/20 to-transparent',
     chip: 'CRM',
@@ -119,8 +121,8 @@ export function SubsidiaryEcosystem() {
               <motion.a
                 key={card.title}
                 href={card.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={card.external ? "_blank" : undefined}
+                rel={card.external ? "noopener noreferrer" : undefined}
                 title={`Open ${card.title}`}
                 initial={{ opacity: 0, y: 36 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -143,10 +145,13 @@ export function SubsidiaryEcosystem() {
                       </span>
                     </div>
 
-                    <ExternalLink
+                    {card.external ? <ExternalLink
                       size={18}
                       className="text-slate-400 transition-all duration-300 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    />
+                    /> : <ArrowUpRight
+                      size={18}
+                      className="text-slate-400 transition-all duration-300 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    />}
                   </div>
 
                   <h3 className="mt-7 text-2xl sm:text-[1.75rem] leading-tight font-bold text-foreground tracking-tight">

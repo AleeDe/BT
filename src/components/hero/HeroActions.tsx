@@ -7,8 +7,12 @@ type HeroActionsProps = {
   secondaryHref: string;
 };
 
-// Hero CTA group with contact primary button and external services secondary button.
+// Hero CTA group with contact primary button and services secondary button.
 export function HeroActions({ primaryLabel, secondaryLabel, secondaryHref }: HeroActionsProps) {
+  const isExternalSecondary = secondaryHref.startsWith("http");
+  const secondaryClassName =
+    "group inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700/50 bg-slate-800/30 px-8 py-4 sm:min-h-[56px] text-base font-semibold text-slate-300 hover:bg-slate-800 hover:text-foreground transition-all duration-300 hover:border-slate-600 hover:-translate-y-1 w-full sm:w-auto";
+
   return (
     <div className="flex flex-col sm:flex-row gap-4 pt-4">
       {/* Primary action: internal contact route. */}
@@ -22,15 +26,20 @@ export function HeroActions({ primaryLabel, secondaryLabel, secondaryHref }: Her
         </span>
       </Link>
 
-      {/* Secondary action: external core services page. */}
-      <a
-        href={secondaryHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700/50 bg-slate-800/30 px-8 py-4 sm:min-h-[56px] text-base font-semibold text-slate-300 hover:bg-slate-800 hover:text-foreground transition-all duration-300 hover:border-slate-600 hover:-translate-y-1 w-full sm:w-auto"
-      >
-        <Zap className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" /> {secondaryLabel}
-      </a>
+      {isExternalSecondary ? (
+        <a
+          href={secondaryHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={secondaryClassName}
+        >
+          <Zap className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" /> {secondaryLabel}
+        </a>
+      ) : (
+        <Link href={secondaryHref} className={secondaryClassName}>
+          <Zap className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" /> {secondaryLabel}
+        </Link>
+      )}
     </div>
   );
 }

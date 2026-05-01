@@ -49,6 +49,28 @@ function DesktopServicesDropdown() {
               );
             }
 
+            if (!item.external && item.href) {
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={`${commonClasses} hover:bg-white/5 ${idx === 0 ? 'mb-1' : ''}`}
+                >
+                  <div className="h-9 w-9 rounded-xl bg-white/5 border border-white/10 grid place-items-center">
+                    <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_10px_rgba(16,185,129,0.6)]" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-sm font-semibold text-gray-100">{item.label}</span>
+                    </div>
+                    <p className={`text-xs text-body mt-0.5 ${idx === 0 ? 'line-clamp-2' : 'line-clamp-1'}`}>
+                      {item.description}
+                    </p>
+                  </div>
+                </Link>
+              );
+            }
+
             return (
               <a
                 key={item.label}

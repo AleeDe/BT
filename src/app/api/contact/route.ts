@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import { google } from 'googleapis';
+import { DISALLOWED_EMAIL_DOMAINS, DISALLOWED_MESSAGE_WORDS } from '@/lib/contact';
 
 export const runtime = 'nodejs';
 
@@ -24,6 +25,31 @@ function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+function getEmailDomain(email: string): string {
+  return email.split('@')[1]?.trim().toLowerCase() || '';
+}
+
+function containsOnlyAscii(value: string): boolean {
+  return /^[\x09\x0A\x0D\x20-\x7E]*$/.test(value);
+}
+
+function containsHtml(value: string): boolean {
+  return /<[^>]*>|&(?:[a-z\d]+|#\d+|#x[a-f\d]+);/i.test(value);
+}
+
+function containsDisallowedWord(value: string): boolean {
+  return DISALLOWED_MESSAGE_WORDS.some((word) => new RegExp(`\\b${word}\\b`, 'i').test(value));
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function validatePayload(payload: Partial<ContactPayload>): string | null {
   if (!payload.name || payload.name.trim().length < 2) {
     return 'Please enter a valid name.';
@@ -31,11 +57,25 @@ function validatePayload(payload: Partial<ContactPayload>): string | null {
   if (!payload.email || !isValidEmail(payload.email)) {
     return 'Please enter a valid email address.';
   }
+  if (DISALLOWED_EMAIL_DOMAINS.has(getEmailDomain(payload.email))) {
+    return 'Please use a business email address instead of a free email provider.';
+  }
   if (!payload.subject || payload.subject.trim().length < 2) {
     return 'Please enter a valid subject.';
   }
   if (!payload.message || payload.message.trim().length < 5) {
     return 'Please enter a valid message.';
+  }
+  const subject = payload.subject.trim();
+  const message = payload.message.trim();
+  if (!containsOnlyAscii(subject) || !containsOnlyAscii(message)) {
+    return 'Subject and message may contain ASCII characters only.';
+  }
+  if (containsDisallowedWord(subject) || containsDisallowedWord(message)) {
+    return 'Subject and message contain blocked words. Please provide a real project inquiry.';
+  }
+  if (containsHtml(subject) || containsHtml(message)) {
+    return 'HTML, scripts, tags, and encoded HTML are not allowed in subject or message.';
   }
   return null;
 }
@@ -82,6 +122,17 @@ async function sendEmail(payload: ContactPayload, submittedAt: string, ip: strin
 
   const fromEmail = process.env.SMTP_FROM_EMAIL || smtpUser;
   const fromName = process.env.SMTP_FROM_NAME || 'BabulTech Contact Form';
+  const safePayload = {
+    name: escapeHtml(payload.name),
+    email: escapeHtml(payload.email),
+    subject: escapeHtml(payload.subject),
+    message: escapeHtml(payload.message).replace(/\n/g, '<br/>'),
+  };
+  const safeMeta = {
+    submittedAt: escapeHtml(submittedAt),
+    ip: escapeHtml(ip),
+    userAgent: escapeHtml(userAgent),
+  };
 
   const transporter = nodemailer.createTransport({
     host: smtpHost,
@@ -111,14 +162,14 @@ async function sendEmail(payload: ContactPayload, submittedAt: string, ip: strin
     ].join('\n'),
     html: `
       <h2>New Contact Form Submission</h2>
-      <p><strong>Name:</strong> ${payload.name}</p>
-      <p><strong>Email:</strong> ${payload.email}</p>
-      <p><strong>Subject:</strong> ${payload.subject}</p>
-      <p><strong>Message:</strong><br/>${payload.message.replace(/\n/g, '<br/>')}</p>
+      <p><strong>Name:</strong> ${safePayload.name}</p>
+      <p><strong>Email:</strong> ${safePayload.email}</p>
+      <p><strong>Subject:</strong> ${safePayload.subject}</p>
+      <p><strong>Message:</strong><br/>${safePayload.message}</p>
       <hr/>
-      <p><strong>Submitted At:</strong> ${submittedAt}</p>
-      <p><strong>IP:</strong> ${ip}</p>
-      <p><strong>User Agent:</strong> ${userAgent}</p>
+      <p><strong>Submitted At:</strong> ${safeMeta.submittedAt}</p>
+      <p><strong>IP:</strong> ${safeMeta.ip}</p>
+      <p><strong>User Agent:</strong> ${safeMeta.userAgent}</p>
     `,
   });
 
@@ -139,6 +190,12 @@ async function sendClientAcknowledgement(payload: ContactPayload) {
 
   const fromEmail = process.env.SMTP_FROM_EMAIL || smtpUser;
   const fromName = process.env.SMTP_FROM_NAME || 'BabulTech Website';
+  const safePayload = {
+    name: escapeHtml(payload.name),
+    subject: escapeHtml(payload.subject),
+    message: escapeHtml(payload.message).replace(/\n/g, '<br/>'),
+  };
+  const safeToEmail = escapeHtml(toEmail);
 
   const transporter = nodemailer.createTransport({
     host: smtpHost,
@@ -171,12 +228,12 @@ async function sendClientAcknowledgement(payload: ContactPayload) {
       'BabulTech Team',
     ].join('\n'),
     html: `
-      <p>Hi ${payload.name},</p>
+      <p>Hi ${safePayload.name},</p>
       <p>Thank you for contacting <strong>BabulTech</strong>.</p>
       <p>We have received your message and our team will get back to you shortly.</p>
-      <p><strong>Your subject:</strong> ${payload.subject}</p>
-      <p><strong>Your message:</strong><br/>${payload.message.replace(/\n/g, '<br/>')}</p>
-      <p>If needed, you can reply directly to: <a href="mailto:${toEmail}">${toEmail}</a></p>
+      <p><strong>Your subject:</strong> ${safePayload.subject}</p>
+      <p><strong>Your message:</strong><br/>${safePayload.message}</p>
+      <p>If needed, you can reply directly to: <a href="mailto:${safeToEmail}">${safeToEmail}</a></p>
       <p>Best regards,<br/>BabulTech Team</p>
     `,
   });

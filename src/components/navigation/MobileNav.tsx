@@ -62,6 +62,19 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     );
                   }
 
+                  if (!item.external && item.href) {
+                    return (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        onClick={onClose}
+                        className="flex items-center gap-2 text-body py-3 min-h-[44px] hover:text-primary transition-colors rounded-lg hover:bg-white/5 px-2"
+                      >
+                        {item.label}
+                      </Link>
+                    );
+                  }
+
                   return (
                     <a
                       key={item.label}

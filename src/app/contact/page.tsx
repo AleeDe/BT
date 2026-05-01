@@ -12,19 +12,19 @@ import {
 } from "@/lib/seo";
 
 const CONTACT_DESCRIPTION =
-  "Talk to BabulTech about Salesforce, Boomi, AWS, Azure, or Google Cloud projects. Email contact@babultech.com, call +92 310 2700403, or send a brief — we reply within one business day.";
+  "Talk to BabulTech about Salesforce, Boomi, AWS, Azure, or Google Cloud projects. Email contact@babultech.com, call +92 310 2700403, or send a brief. We reply within one business day.";
 
 export const metadata: Metadata = {
-  title: "Contact BabulTech — Schedule a Consultation",
+  title: "Contact BabulTech - Schedule a Consultation",
   description: CONTACT_DESCRIPTION,
   alternates: { canonical: canonical("/contact") },
   openGraph: {
     url: canonical("/contact"),
-    title: "Contact BabulTech — Schedule a Consultation",
+    title: "Contact BabulTech - Schedule a Consultation",
     description: CONTACT_DESCRIPTION,
   },
   twitter: {
-    title: "Contact BabulTech — Schedule a Consultation",
+    title: "Contact BabulTech - Schedule a Consultation",
     description: CONTACT_DESCRIPTION,
   },
 };

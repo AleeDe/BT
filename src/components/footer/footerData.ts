@@ -17,16 +17,16 @@ export const footerSocialLinks: FooterSocialLink[] = [
 ];
 
 export const footerExpertiseLinks: FooterSimpleLink[] = [
-  { label: 'Enterprise IT Solutions', href: 'https://core-services-kappa.vercel.app/', external: true },
-  { label: 'CRM Implementation', href: 'https://core-services-kappa.vercel.app/', external: true },
-  { label: 'Technical Partnership', href: 'https://core-services-kappa.vercel.app/', external: true },
-  { label: 'Cloud Infrastructure', href: 'https://core-services-kappa.vercel.app/', external: true },
+  { label: 'Enterprise IT Solutions', href: '/core-services#enterprise-it' },
+  { label: 'CRM Implementation', href: '/core-services#crm-implementation' },
+  { label: 'Technical Partnership', href: '/core-services#technical-partnership' },
+  { label: 'Cloud Infrastructure', href: '/core-services#cloud-infrastructure' },
 ];
 
 export const footerCompanyLinks: FooterSimpleLink[] = [
   { label: 'About Us', href: '/about' },
   { label: 'Our Case Studies', href: '/case-studies' },
-  { label: 'Our Core Services', href: 'https://core-services-kappa.vercel.app/', external: true },
+  { label: 'Our Core Services', href: '/core-services' },
   { label: 'Industries', href: '/industries' },
 ];
 

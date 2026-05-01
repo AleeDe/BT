@@ -1,3 +1,5 @@
+import { CONTACT_EMAIL, CONTACT_PHONE } from "@/lib/contact";
+
 // Single source of truth for SEO. Update SITE_URL when the production domain changes.
 
 export const SITE_URL =
@@ -10,8 +12,8 @@ export const SITE_DESCRIPTION =
 
 export const ORG_LEGAL_NAME = "BabulTech";
 export const ORG_LOGO = `${SITE_URL}/logo.png`;
-export const ORG_EMAIL = "contact@babultech.com";
-export const ORG_PHONE = "+92 310 2700403";
+export const ORG_EMAIL = CONTACT_EMAIL;
+export const ORG_PHONE = CONTACT_PHONE;
 export const ORG_ADDRESS = {
   addressLocality: "Skardu",
   addressCountry: "PK",

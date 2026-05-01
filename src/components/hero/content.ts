@@ -71,7 +71,7 @@ export const heroContent = {
   actions: {
     primaryLabel: "Start Your Transformation",
     secondaryLabel: "Our Core Services",
-    secondaryHref: "https://core-services-kappa.vercel.app/",
+    secondaryHref: "/core-services",
   },
   // Trust strip values and labels.
   trust: {

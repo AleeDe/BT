@@ -19,19 +19,17 @@ export const primaryNavLinks: NavLinkItem[] = [
 export const serviceItems: ServiceItem[] = [
   {
     label: 'Our Core Services',
-    href: 'https://core-services-kappa.vercel.app/',
+    href: '/core-services',
     description: 'Solving bottlenecks via powerful strategic Technical Partnerships',
-    external: true,
   },
   {
     label: 'CloudQube',
-    href: 'https://cloud-qube.vercel.app/',
+    href: '/cloud-qube',
     description: 'Enterprise CRM Solutions',
-    external: true,
   },
   {
     label: 'AI & Data Science',
-    description: 'Advanced AI solutions and analytics services',
-    comingSoon: true,
+    href: '/ai-data-science',
+    description: 'LLMs, predictive analytics, AI agents, and MLOps',
   },
 ];

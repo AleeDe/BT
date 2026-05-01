@@ -68,8 +68,13 @@ export function AboutCertificationsSection() {
                     key={item.name}
                     className="rounded-2xl border border-slate-800 bg-slate-900/70 backdrop-blur-sm p-5 flex flex-col gap-4"
                   >
-                    <div className="h-10 flex items-center">
-                      <img src={item.src} alt={`${item.issuer} logo`} className="h-8 w-auto max-w-[160px] object-contain opacity-90" loading="lazy" />
+                    <div className="flex h-24 items-center justify-center rounded-xl border border-slate-800/70 bg-slate-950/30 p-3">
+                      <img
+                        src={item.src}
+                        alt={`${item.name} logo`}
+                        className="h-16 w-36 object-contain opacity-95"
+                        loading="lazy"
+                      />
                     </div>
 
                     <div className="space-y-2">

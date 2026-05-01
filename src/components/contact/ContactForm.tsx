@@ -151,6 +151,9 @@ export function ContactForm() {
                 placeholder="john@company.com"
               />
             </div>
+            <p className="text-xs text-slate-500 ml-1">
+              Business email only. Free domains like Gmail, Outlook, Hotmail, Yahoo, AOL, and Live are not accepted.
+            </p>
           </div>
         </div>
 
@@ -163,11 +166,15 @@ export function ContactForm() {
             id="subject"
             name="subject"
             required
+            pattern="[\x20-\x7E]+"
             value={formState.subject}
             onChange={handleChange}
             className="w-full bg-[#020617]/50 border border-slate-800 rounded-xl py-3 px-4 text-foreground placeholder-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-[var(--primary)] transition-all duration-300 hover:border-slate-700"
             placeholder="How can we help you?"
           />
+          <p className="text-xs text-slate-500 ml-1">
+            ASCII text only. Do not include HTML, scripts, or placeholder words like test/html.
+          </p>
         </div>
 
         <div className="space-y-2">
@@ -184,6 +191,9 @@ export function ContactForm() {
             className="w-full bg-[#020617]/50 border border-slate-800 rounded-xl py-3 px-4 text-foreground placeholder-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-[var(--primary)] transition-all duration-300 hover:border-slate-700 resize-none"
             placeholder="Tell us about your project or inquiry..."
           />
+          <p className="text-xs text-slate-500 ml-1">
+            Plain ASCII text only. HTML tags/entities and test submissions are blocked.
+          </p>
         </div>
 
         <div className="space-y-3">
