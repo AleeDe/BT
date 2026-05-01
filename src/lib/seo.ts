@@ -6,7 +6,7 @@ export const SITE_URL =
 export const SITE_NAME = "BabulTech";
 export const SITE_TAGLINE = "Certified Expertise. Rapid Resolution.";
 export const SITE_DESCRIPTION =
-  "BabulTech architects enterprise IT solutions, CRM implementations, and technical partnerships. Salesforce, AWS, Azure, Google Cloud, and Boomi certified experts delivering rapid resolution.";
+  "Enterprise IT, CRM, and cloud solutions from certified Salesforce, AWS, Azure, Google Cloud, and Boomi experts. Rapid resolution, delivered end to end.";
 
 export const ORG_LEGAL_NAME = "BabulTech";
 export const ORG_LOGO = `${SITE_URL}/logo.png`;

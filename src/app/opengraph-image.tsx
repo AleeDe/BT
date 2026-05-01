@@ -15,89 +15,116 @@ export default function OpenGraphImage() {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
-          padding: "80px",
+          padding: "72px 80px",
           background:
-            "radial-gradient(circle at 20% 0%, rgba(16,185,129,0.25), transparent 50%), radial-gradient(circle at 100% 100%, rgba(99,102,241,0.25), transparent 50%), #020617",
+            "radial-gradient(circle at 15% 0%, rgba(16,185,129,0.32), transparent 55%), radial-gradient(circle at 100% 100%, rgba(99,102,241,0.28), transparent 50%), #020617",
           color: "white",
           fontFamily: "system-ui, sans-serif",
         }}
       >
+        {/* Brand row */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "16px",
-            fontSize: "28px",
-            opacity: 0.85,
-            marginBottom: "32px",
+            gap: "14px",
+            fontSize: "26px",
+            fontWeight: 700,
+            color: "#10b981",
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
           }}
         >
           <div
             style={{
-              width: "12px",
-              height: "12px",
+              width: "14px",
+              height: "14px",
               borderRadius: "9999px",
               background: "#10b981",
-              boxShadow: "0 0 24px #10b981",
+              boxShadow: "0 0 28px #10b981",
             }}
           />
-          <span style={{ letterSpacing: "0.2em", textTransform: "uppercase" }}>
-            {SITE_NAME}
-          </span>
+          <span>{SITE_NAME}</span>
         </div>
 
+        {/* Main headline — large, prominent, single focal point */}
         <div
           style={{
-            fontSize: "84px",
-            fontWeight: 800,
-            lineHeight: 1.05,
-            letterSpacing: "-0.02em",
             display: "flex",
             flexDirection: "column",
+            marginTop: "44px",
+            fontSize: "108px",
+            fontWeight: 900,
+            lineHeight: 0.98,
+            letterSpacing: "-0.035em",
           }}
         >
-          <span style={{ color: "#cbd5e1" }}>Certified Expertise.</span>
+          <span style={{ color: "#f8fafc" }}>Architecting</span>
           <span
             style={{
-              backgroundImage: "linear-gradient(90deg,#10b981,#34d399)",
+              backgroundImage: "linear-gradient(90deg,#10b981 0%,#34d399 50%,#6ee7b7 100%)",
               backgroundClip: "text",
               color: "transparent",
             }}
           >
-            Rapid Resolution.
+            Enterprise IT.
           </span>
         </div>
 
+        {/* Subheading */}
         <div
           style={{
-            marginTop: "40px",
-            fontSize: "30px",
-            color: "#94a3b8",
-            maxWidth: "900px",
-            lineHeight: 1.35,
+            display: "flex",
+            marginTop: "28px",
+            fontSize: "32px",
+            color: "#cbd5e1",
+            fontWeight: 500,
+            maxWidth: "920px",
+            lineHeight: 1.3,
           }}
         >
-          Enterprise IT Solutions · CRM Implementation · Technical Partnership
+          Salesforce · AWS · Azure · Google Cloud · Boomi — certified, end to end.
         </div>
 
+        {/* Bottom row: CTA button + URL */}
         <div
           style={{
             marginTop: "auto",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            fontSize: "22px",
-            color: "#64748b",
           }}
         >
-          <span>Salesforce · AWS · Azure · Google Cloud · Boomi</span>
-          <span>babultech.com</span>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "14px",
+              padding: "18px 36px",
+              fontSize: "28px",
+              fontWeight: 700,
+              color: "#020617",
+              background: "linear-gradient(90deg,#10b981,#34d399)",
+              borderRadius: "9999px",
+              boxShadow: "0 12px 40px rgba(16,185,129,0.45)",
+            }}
+          >
+            <span>Start Your Transformation</span>
+            <span style={{ fontSize: "32px", lineHeight: 1 }}>→</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              fontSize: "24px",
+              color: "#94a3b8",
+              fontWeight: 500,
+            }}
+          >
+            babultech.com
+          </div>
         </div>
       </div>
     ),
-    {
-      ...size,
-    },
+    { ...size },
   );
 }

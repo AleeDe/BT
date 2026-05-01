@@ -55,14 +55,8 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: `${SITE_NAME} | ${SITE_TAGLINE}`,
     description: SITE_DESCRIPTION,
-    images: [
-      {
-        url: "/opengraph-image",
-        width: 1200,
-        height: 630,
-        alt: `${SITE_NAME} — ${SITE_TAGLINE}`,
-      },
-    ],
+    // Note: og:image is auto-injected by Next.js from app/opengraph-image.tsx.
+    // Do NOT add `images` here — it would emit a duplicate, hash-less URL that fails to resolve.
   },
   twitter: {
     card: "summary_large_image",
@@ -70,7 +64,7 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     site: TWITTER_HANDLE,
     creator: TWITTER_HANDLE,
-    images: ["/opengraph-image"],
+    // twitter:image is auto-injected by Next.js from app/twitter-image.tsx — do not duplicate.
   },
   robots: {
     index: true,
@@ -85,9 +79,12 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/logo.png",
-    shortcut: "/logo.png",
-    apple: "/logo.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
   },
   verification: {
     // Replace with the value from Google Search Console -> "HTML tag" verification.
