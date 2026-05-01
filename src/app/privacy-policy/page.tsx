@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
+import { canonical } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | BabulTech',
+  title: 'Privacy Policy',
   description:
     'Learn how BabulTech collects, uses, stores, and protects personal information across our website and services.',
+  alternates: { canonical: canonical('/privacy-policy') },
+  robots: { index: true, follow: true },
 };
 
 const sections = [

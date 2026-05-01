@@ -1,28 +1,103 @@
+import type { Metadata } from "next";
 import { caseStudies } from "@/data/caseStudies";
 import { ArrowLeft, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { JsonLd } from "@/components/JsonLd";
+import {
+  absoluteUrl,
+  articleJsonLd,
+  breadcrumbJsonLd,
+  canonical,
+} from "@/lib/seo";
 
-// Enable dynamic params for Next.js 15+ App Router
-export default async function CaseStudyDetail({ params }: { params: Promise<{ id: string }> }) {
+type Params = { id: string };
+
+export async function generateStaticParams(): Promise<Params[]> {
+  return caseStudies.map((cs) => ({ id: cs.id }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}): Promise<Metadata> {
   const { id } = await params;
-  
-  // Find the matching case study by ID
   const study = caseStudies.find((cs) => cs.id === id);
 
   if (!study) {
-    notFound(); // Triggers 404 page if not found
+    return {
+      title: "Case Study Not Found",
+      robots: { index: false, follow: false },
+    };
   }
+
+  const title = `${study.title} — ${study.clientName}`;
+  const description = `${study.category} case study: ${study.problem.slice(0, 155)}`;
+  const url = canonical(`/case-studies/${study.id}`);
+  const ogImage = absoluteUrl(study.gifSrc);
+
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      url,
+      title,
+      description,
+      images: [{ url: ogImage, alt: study.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
+    },
+  };
+}
+
+export default async function CaseStudyDetail({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
+  const { id } = await params;
+  const study = caseStudies.find((cs) => cs.id === id);
+
+  if (!study) {
+    notFound();
+  }
+
+  const url = `/case-studies/${study.id}`;
 
   return (
     <div className="bg-background min-h-screen text-slate-300">
+      <JsonLd
+        id={`ld-case-study-breadcrumbs-${study.id}`}
+        data={breadcrumbJsonLd([
+          { name: "Home", url: "/" },
+          { name: "Case Studies", url: "/case-studies" },
+          { name: study.title, url },
+        ])}
+      />
+      <JsonLd
+        id={`ld-case-study-article-${study.id}`}
+        data={articleJsonLd({
+          title: study.title,
+          description: study.problem,
+          url,
+          image: study.gifSrc,
+        })}
+      />
+
       {/* Dynamic Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden border-b border-slate-800">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent pointer-events-none"></div>
-        
+
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <Link 
-            href="/case-studies" 
+          <Link
+            href="/case-studies"
             className="inline-flex items-center text-primary hover:text-primary mb-8 transition-colors group text-sm font-medium"
           >
             <ArrowLeft className="w-4 h-4 mr-2 transform group-hover:-translate-x-1 transition-transform" />
@@ -45,10 +120,9 @@ export default async function CaseStudyDetail({ params }: { params: Promise<{ id
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
           <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-blue-900/20 aspect-video bg-slate-900 border border-slate-800">
             <div className="absolute inset-0 bg-primary/10 z-10 pointer-events-none mix-blend-overlay"></div>
-            {/* Fallback image is handled directly via normal src if custom gifs don't exist yet */}
-            <img 
-              src={study.gifSrc || "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"} 
-              alt={study.title}
+            <img
+              src={study.gifSrc || "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"}
+              alt={`${study.title} — ${study.category} project visual`}
               loading="lazy"
               className="w-full h-full object-cover"
             />
@@ -59,9 +133,9 @@ export default async function CaseStudyDetail({ params }: { params: Promise<{ id
       {/* Main Content & Architecture chunking */}
       <section className="py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            
+
             {/* Left Column: Stats (Quick scanning) */}
             <div className="md:col-span-1 border-r border-slate-800/50 pr-8">
               <h3 className="text-foreground font-semibold mb-6 flex items-center">
@@ -84,7 +158,7 @@ export default async function CaseStudyDetail({ params }: { params: Promise<{ id
 
             {/* Right Column: Narrative chunking */}
             <div className="md:col-span-2 space-y-12">
-              
+
               {/* Problem Chunk */}
               <div>
                 <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center">
@@ -134,8 +208,8 @@ export default async function CaseStudyDetail({ params }: { params: Promise<{ id
           <p className="text-slate-400 mb-8 text-lg">
             Let us architect a certified, rapid resolution for your biggest technological roadblocks.
           </p>
-          <Link 
-            href="/contact" 
+          <Link
+            href="/contact"
             className="inline-flex items-center justify-center px-8 py-4 text-foreground bg-primary hover:bg-primary rounded-xl transition-all duration-300 font-medium shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.5)]"
           >
             Schedule a Consultation

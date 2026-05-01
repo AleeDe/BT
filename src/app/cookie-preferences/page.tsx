@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
+import { canonical } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Cookie Preferences | BabulTech',
+  title: 'Cookie Preferences',
   description:
     'Understand and manage how cookies and related technologies are used on BabulTech websites.',
+  alternates: { canonical: canonical('/cookie-preferences') },
+  robots: { index: false, follow: true },
 };
 
 const cookieTypes = [

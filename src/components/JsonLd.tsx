@@ -1,0 +1,17 @@
+type JsonLdProps = {
+  data: Record<string, unknown> | Record<string, unknown>[];
+  id?: string;
+};
+
+export function JsonLd({ data, id }: JsonLdProps) {
+  return (
+    <script
+      type="application/ld+json"
+      id={id}
+      // JSON.stringify is safe; we control the input shape and escape forward slashes to prevent </script> injection.
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(data).replace(/</g, "\\u003c"),
+      }}
+    />
+  );
+}
