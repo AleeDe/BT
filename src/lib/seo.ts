@@ -1,7 +1,7 @@
 // Single source of truth for SEO. Update SITE_URL when the production domain changes.
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://babultech.com";
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://www.babultech.com";
 
 export const SITE_NAME = "BabulTech";
 export const SITE_TAGLINE = "Certified Expertise. Rapid Resolution.";
