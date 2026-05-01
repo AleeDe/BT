@@ -12,7 +12,7 @@ export type FooterSocialLink = {
 export const footerSocialLinks: FooterSocialLink[] = [
   { label: 'Facebook', href: 'https://facebook.com' },
   { label: 'Twitter', href: '#' },
-  { label: 'LinkedIn', href: '#' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/babultech/about/?viewAsMember=true' },
   { label: 'GitHub', href: '#' },
 ];
 
