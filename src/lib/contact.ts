@@ -7,8 +7,8 @@ export const CONTACT_HOURS = "Mon - Fri, 10am to 12pm PKT";
 export const OFFICE_LOCATIONS = [
   {
     label: "IDC Office",
-    address: "IDC Office, Skardu, Pakistan",
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=IDC%20Office%2C%20Skardu%2C%20Pakistan",
+    address: "Karachi, Pakistan",
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=Karachi%2C%20Pakistan",
   },
   {
     label: "Head Office",

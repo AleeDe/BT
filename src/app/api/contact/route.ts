@@ -13,6 +13,12 @@ type SubmissionState = {
 
 const submissionStore = new Map<string, SubmissionState>();
 const SUBMISSION_TTL_MS = 30 * 60 * 1000;
+const BUSINESS_EMAIL_ERROR =
+  'Business email only. Free domains like Gmail, Outlook, Hotmail, Yahoo, AOL, and Live are not accepted.';
+const SUBJECT_ERROR =
+  'ASCII text only. Do not include HTML, scripts, or placeholder words like test/html.';
+const MESSAGE_ERROR =
+  'Plain ASCII text only. HTML tags/entities and test submissions are blocked.';
 
 type ContactPayload = {
   name: string;
@@ -55,27 +61,27 @@ function validatePayload(payload: Partial<ContactPayload>): string | null {
     return 'Please enter a valid name.';
   }
   if (!payload.email || !isValidEmail(payload.email)) {
-    return 'Please enter a valid email address.';
+    return BUSINESS_EMAIL_ERROR;
   }
   if (DISALLOWED_EMAIL_DOMAINS.has(getEmailDomain(payload.email))) {
-    return 'Please use a business email address instead of a free email provider.';
+    return BUSINESS_EMAIL_ERROR;
   }
   if (!payload.subject || payload.subject.trim().length < 2) {
-    return 'Please enter a valid subject.';
+    return SUBJECT_ERROR;
   }
   if (!payload.message || payload.message.trim().length < 5) {
-    return 'Please enter a valid message.';
+    return MESSAGE_ERROR;
   }
   const subject = payload.subject.trim();
   const message = payload.message.trim();
   if (!containsOnlyAscii(subject) || !containsOnlyAscii(message)) {
-    return 'Subject and message may contain ASCII characters only.';
+    return !containsOnlyAscii(subject) ? SUBJECT_ERROR : MESSAGE_ERROR;
   }
   if (containsDisallowedWord(subject) || containsDisallowedWord(message)) {
-    return 'Subject and message contain blocked words. Please provide a real project inquiry.';
+    return containsDisallowedWord(subject) ? SUBJECT_ERROR : MESSAGE_ERROR;
   }
   if (containsHtml(subject) || containsHtml(message)) {
-    return 'HTML, scripts, tags, and encoded HTML are not allowed in subject or message.';
+    return containsHtml(subject) ? SUBJECT_ERROR : MESSAGE_ERROR;
   }
   return null;
 }

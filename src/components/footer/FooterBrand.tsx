@@ -1,13 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Facebook, Twitter, Linkedin, Github } from 'lucide-react';
+import { Facebook, Twitter, Linkedin, Youtube, Instagram } from 'lucide-react';
 import { footerSocialLinks } from '@/components/footer/footerData';
 
 const socialIconMap = {
   Facebook,
   Twitter,
   LinkedIn: Linkedin,
-  GitHub: Github,
+  YouTube: Youtube,
+  Instagram,
 };
 
 export function FooterBrand() {
@@ -26,7 +27,7 @@ export function FooterBrand() {
       </Link>
 
       <p className="text-slate-400 leading-relaxed text-sm">
-        Delivering certified expertise and rapid resolution across enterprise IT, CRM implementation, and functioning as your
+        Delivering certified expertise and rapid resolution across enterprise IT, enterprise solutions implementation, and functioning as your
         strategic technical partner.
       </p>
 

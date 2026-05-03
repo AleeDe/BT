@@ -146,7 +146,7 @@ export function ProcessSection() {
           transition={{ delay: 0.5 }}
         >
           <p className="text-dark-300 text-lg mb-6">
-            Ready to experience the CloudQube difference?
+            Ready to experience the Customer Portal difference?
           </p>
           <motion.button
             className="px-8 py-4 rounded-xl bg-gradient-emerald text-white font-semibold hover:shadow-glow-lg transition-all duration-300"

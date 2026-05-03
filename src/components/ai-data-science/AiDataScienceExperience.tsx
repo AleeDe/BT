@@ -158,6 +158,131 @@ const trustBadges = [
   { icon: Network, label: "Integration-ready agents" },
 ];
 
+const heroSignals = [
+  { label: "Data quality", value: "98%", width: "98%" },
+  { label: "Model confidence", value: "94%", width: "94%" },
+  { label: "Manual work reduced", value: "61%", width: "61%" },
+];
+
+const heroPipeline = [
+  { icon: Database, label: "Private Data", detail: "CRM + Docs" },
+  { icon: Brain, label: "Reasoning", detail: "RAG + Evals" },
+  { icon: Workflow, label: "Automation", detail: "APIs + Agents" },
+];
+
+function AiHeroAnimation({ reduceMotion }: { reduceMotion: boolean }) {
+  return (
+    <motion.div
+      initial={reduceMotion ? false : { opacity: 0, x: 36, scale: 0.96 }}
+      animate={{ opacity: 1, x: 0, scale: 1 }}
+      transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
+      className="relative hidden min-h-[520px] lg:block"
+      aria-hidden="true"
+    >
+      <div className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle_at_50%_25%,rgba(16,185,129,0.22),transparent_34%),linear-gradient(145deg,rgba(15,23,42,0.88),rgba(2,6,23,0.52))] shadow-[0_30px_100px_-50px_rgba(16,185,129,0.65)]" />
+      <div className="absolute inset-6 rounded-[1.5rem] bg-slate-950/55 backdrop-blur-xl" />
+
+      {!reduceMotion && (
+        <>
+          <motion.div
+            className="absolute left-16 right-16 top-32 h-px bg-gradient-to-r from-transparent via-primary/70 to-transparent"
+            animate={{ opacity: [0.25, 0.9, 0.25], scaleX: [0.72, 1, 0.72] }}
+            transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute bottom-36 left-20 right-20 h-px bg-gradient-to-r from-transparent via-cyan-300/60 to-transparent"
+            animate={{ opacity: [0.2, 0.75, 0.2], scaleX: [1, 0.76, 1] }}
+            transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </>
+      )}
+
+      <div className="relative z-10 p-8">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">
+              Live AI Command Center
+            </p>
+            <h3 className="mt-2 text-2xl font-extrabold text-white">Decision Engine</h3>
+          </div>
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/15 text-primary">
+            <Sparkles className="h-5 w-5" />
+          </div>
+        </div>
+
+        <div className="mt-8 grid grid-cols-3 gap-3">
+          {heroPipeline.map(({ icon: Icon, label, detail }, index) => (
+            <motion.div
+              key={label}
+              className="relative rounded-2xl bg-white/[0.05] p-4"
+              animate={reduceMotion ? undefined : { y: [0, -7, 0] }}
+              transition={{
+                duration: 3.4,
+                delay: index * 0.35,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <Icon className="h-5 w-5" />
+              </div>
+              <p className="mt-3 text-center text-sm font-bold text-slate-100">{label}</p>
+              <p className="mt-1 text-center text-[11px] text-slate-500">{detail}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="mt-8 rounded-3xl bg-slate-950/70 p-5">
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-semibold text-slate-200">Opportunity detected</span>
+            <span className="rounded-full bg-primary/15 px-3 py-1 text-xs font-bold text-primary">
+              High impact
+            </span>
+          </div>
+
+          <div className="mt-5 space-y-4">
+            {heroSignals.map((signal, index) => (
+              <div key={signal.label}>
+                <div className="mb-2 flex items-center justify-between text-xs">
+                  <span className="text-slate-400">{signal.label}</span>
+                  <span className="font-bold text-slate-100">{signal.value}</span>
+                </div>
+                <div className="h-2 overflow-hidden rounded-full bg-slate-800">
+                  <motion.div
+                    className="h-full rounded-full bg-gradient-to-r from-primary to-cyan-300"
+                    initial={reduceMotion ? false : { width: 0 }}
+                    animate={{ width: signal.width }}
+                    transition={{ duration: 1.1, delay: 0.45 + index * 0.18, ease: "easeOut" }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <motion.div
+          className="absolute bottom-8 left-8 right-8 rounded-3xl bg-white/[0.06] p-5"
+          animate={reduceMotion ? undefined : { y: [0, 8, 0] }}
+          transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <div className="flex items-start gap-3">
+            <div className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-cyan-300/10 text-cyan-200">
+              <Bot className="h-5 w-5" />
+            </div>
+            <div>
+              <p className="text-sm font-bold text-white">Recommended next action</p>
+              <p className="mt-1 text-xs leading-relaxed text-slate-400">
+                Automate ticket triage, summarize customer intent, and route priority cases to the
+                right team with measurable SLA lift.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+}
+
 export function AiDataScienceExperience() {
   const reduceMotion = useReducedMotion() ?? false;
 
@@ -173,8 +298,9 @@ export function AiDataScienceExperience() {
             initial={reduceMotion ? false : { opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="max-w-3xl"
+            className="grid items-center gap-14 lg:grid-cols-[1fr_0.86fr]"
           >
+            <div className="max-w-3xl">
             <span className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900/80 border border-slate-700/50 backdrop-blur-md text-xs font-semibold tracking-wide text-slate-200 mb-8">
               <Sparkles className="w-4 h-4 text-primary" />
               Enterprise AI &amp; Data Science
@@ -222,6 +348,9 @@ export function AiDataScienceExperience() {
                 </div>
               ))}
             </div>
+            </div>
+
+            <AiHeroAnimation reduceMotion={reduceMotion} />
           </motion.div>
         </div>
       </section>

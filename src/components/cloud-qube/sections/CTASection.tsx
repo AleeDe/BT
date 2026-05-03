@@ -82,7 +82,7 @@ export function CTASection() {
                 viewport={{ once: true }}
               >
                 Join hundreds of companies that have accelerated their Salesforce
-                deployment with CloudQube. Experience the power of AI-driven consulting
+                deployment with Customer Portal. Experience the power of AI-driven consulting
                 with zero complexity.
               </motion.p>
 
@@ -135,7 +135,11 @@ export function CTASection() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Button size="lg" variant="outline">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    onClick={() => window.location.href = '/contact'}
+                  >
                     Schedule Demo
                   </Button>
                 </motion.div>

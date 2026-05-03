@@ -11,6 +11,29 @@ function iconFor(name: "phone" | "mail" | "map-pin") {
   return <MapPin className="w-6 h-6" />;
 }
 
+function ContactDescription({ method }: { method: (typeof contactMethods)[number] }) {
+  if (method.icon !== "phone") {
+    return <p className="text-sm text-slate-400 mb-3">{method.description}</p>;
+  }
+
+  const [beforePkt, afterPkt = ""] = method.description.split("PKT");
+
+  return (
+    <div className="mb-3 space-y-1">
+      <p className="text-sm text-slate-400 flex flex-wrap items-center gap-1.5">
+        <span>{beforePkt}</span>
+        <img
+          src="/pakistan-flag.png"
+          alt="Pakistan flag"
+          className="h-4 w-6 rounded-[2px] object-cover"
+        />
+        <span>PKT{afterPkt}</span>
+      </p>
+      <p className="text-xs font-semibold text-primary">Proud to be a Pakistani</p>
+    </div>
+  );
+}
+
 export function ContactMethods() {
   return (
     <div className="lg:col-span-2 space-y-6">
@@ -29,7 +52,7 @@ export function ContactMethods() {
           </div>
           <div>
             <h3 className="text-xl font-semibold text-foreground mb-1">{method.title}</h3>
-            <p className="text-sm text-slate-400 mb-3">{method.description}</p>
+            <ContactDescription method={method} />
             {method.icon === "map-pin" ? (
               <div className="space-y-2">
                 {OFFICE_LOCATIONS.map((office) => (

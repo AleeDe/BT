@@ -13,12 +13,13 @@ export const footerSocialLinks: FooterSocialLink[] = [
   { label: 'Facebook', href: 'https://facebook.com' },
   { label: 'Twitter', href: '#' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/company/babultech/about/?viewAsMember=true' },
-  { label: 'GitHub', href: '#' },
+  { label: 'YouTube', href: 'https://youtube.com' },
+  { label: 'Instagram', href: 'https://instagram.com' },
 ];
 
 export const footerExpertiseLinks: FooterSimpleLink[] = [
   { label: 'Enterprise IT Solutions', href: '/core-services#enterprise-it' },
-  { label: 'CRM Implementation', href: '/core-services#crm-implementation' },
+  { label: 'Enterprise Implementation', href: '/core-services#crm-implementation' },
   { label: 'Technical Partnership', href: '/core-services#technical-partnership' },
   { label: 'Cloud Infrastructure', href: '/core-services#cloud-infrastructure' },
 ];

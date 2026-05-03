@@ -8,6 +8,22 @@ import {
   OFFICE_LOCATIONS,
 } from '@/lib/contact';
 
+function FooterHours() {
+  const [beforePkt, afterPkt = ''] = CONTACT_HOURS.split('PKT');
+
+  return (
+    <p className="mt-1 flex flex-wrap items-center gap-1.5 text-xs text-slate-500">
+      <span>{beforePkt}</span>
+      <img
+        src="/pakistan-flag.png"
+        alt="Pakistan flag"
+        className="h-3.5 w-5 rounded-[2px] object-cover"
+      />
+      <span>PKT{afterPkt}</span>
+    </p>
+  );
+}
+
 export function FooterContact() {
   return (
     <div>
@@ -35,7 +51,7 @@ export function FooterContact() {
             <a href={CONTACT_PHONE_HREF} className="text-sm text-slate-400 hover:text-foreground transition-colors">
               {CONTACT_PHONE}
             </a>
-            <p className="mt-1 text-xs text-slate-500">{CONTACT_HOURS}</p>
+            <FooterHours />
           </div>
         </li>
         <li className="flex items-center">

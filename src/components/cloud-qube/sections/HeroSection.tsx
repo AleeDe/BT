@@ -11,7 +11,7 @@ import { ArrowRight, Zap } from 'lucide-react';
 const PORTAL_URL = 'https://apex-accelerator-portal.vercel.app/auth';
 
 const stats = [
-  { label: 'Companies', value: '500+' },
+  { label: 'Companies', value: '5+' },
   { label: 'Time Saved', value: '1000+ hrs' },
   { label: 'Success Rate', value: '99.8%' },
 ];

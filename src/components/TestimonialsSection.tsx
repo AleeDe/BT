@@ -42,9 +42,9 @@ const reviewers: Reviewer[] = [
   },
   {
     name: "Mariam Noor",
-    title: "CRM Program Manager",
+    title: "Enterprise Program Manager",
     review:
-      "They understood the business goal first, then shaped the CRM implementation around measurable outcomes.",
+      "They understood the business goal first, then shaped the enterprise implementation around measurable outcomes.",
   },
 ];
 
@@ -129,7 +129,7 @@ export function TestimonialsSection() {
             </motion.h2>
           </div>
           <p className="max-w-sm text-sm leading-6 text-body">
-            A quick roll-call of leaders who trust BabulTech for delivery, CRM, and technical partnership.
+            A quick roll-call of leaders who trust BabulTech for delivery, enterprise solutions, and technical partnership.
           </p>
         </div>
 

@@ -12,17 +12,17 @@ const serviceCards = [
     external: false,
     icon: Sparkles,
     accentClass: 'from-primary/45 via-primary/20 to-transparent',
-    chip: 'Flagship',
+    chip: 'Core',
   },
   {
-    title: 'CloudQube',
+    title: 'Customer Portal',
     description:
-      'Enterprise CRM systems designed for adoption, performance, and measurable outcomes across sales and operations.',
-    href: '/cloud-qube',
+      'Enterprise systems designed for adoption, performance, and measurable outcomes across sales and operations.',
+    href: '/customer-portal',
     external: false,
     icon: Cloud,
     accentClass: 'from-cyan-400/40 via-primary/20 to-transparent',
-    chip: 'CRM',
+    chip: 'Customer Portal',
   },
 ];
 const particles = [

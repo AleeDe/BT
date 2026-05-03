@@ -11,6 +11,73 @@ type ContactFormState = {
   message: string;
 };
 
+const BUSINESS_EMAIL_ERROR =
+  "Business email only. Free domains like Gmail, Outlook, Hotmail, Yahoo, AOL, and Live are not accepted.";
+const SUBJECT_ERROR =
+  "ASCII text only. Do not include HTML, scripts, or placeholder words like test/html.";
+const MESSAGE_ERROR =
+  "Plain ASCII text only. HTML tags/entities and test submissions are blocked.";
+
+const freeEmailDomains = new Set([
+  "aol.com",
+  "gmail.com",
+  "googlemail.com",
+  "hotmail.com",
+  "icloud.com",
+  "live.com",
+  "me.com",
+  "msn.com",
+  "outlook.com",
+  "proton.me",
+  "protonmail.com",
+  "yahoo.com",
+  "ymail.com",
+]);
+
+function containsOnlyAscii(value: string) {
+  return /^[\x09\x0A\x0D\x20-\x7E]*$/.test(value);
+}
+
+function containsHtml(value: string) {
+  return /<[^>]*>|&(?:[a-z\d]+|#\d+|#x[a-f\d]+);/i.test(value);
+}
+
+function containsBlockedWord(value: string) {
+  return /\b(?:test|html)\b/i.test(value);
+}
+
+function validateForm(formState: ContactFormState) {
+  const emailDomain = formState.email.split("@")[1]?.trim().toLowerCase() || "";
+
+  if (!formState.name.trim() || formState.name.trim().length < 2) {
+    return "Please enter a valid name.";
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formState.email) || freeEmailDomains.has(emailDomain)) {
+    return BUSINESS_EMAIL_ERROR;
+  }
+
+  if (
+    formState.subject.trim().length < 2 ||
+    !containsOnlyAscii(formState.subject) ||
+    containsHtml(formState.subject) ||
+    containsBlockedWord(formState.subject)
+  ) {
+    return SUBJECT_ERROR;
+  }
+
+  if (
+    formState.message.trim().length < 5 ||
+    !containsOnlyAscii(formState.message) ||
+    containsHtml(formState.message) ||
+    containsBlockedWord(formState.message)
+  ) {
+    return MESSAGE_ERROR;
+  }
+
+  return "";
+}
+
 export function ContactForm() {
   const [formState, setFormState] = useState<ContactFormState>({
     name: "",
@@ -24,6 +91,13 @@ export function ContactForm() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const validationError = validateForm(formState);
+
+    if (validationError) {
+      setSubmitError(validationError);
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitError("");
 
@@ -94,6 +168,10 @@ export function ContactForm() {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    if (submitError) {
+      setSubmitError("");
+    }
+
     setFormState((prev) => ({
       ...prev,
       [event.target.name]: event.target.value,
@@ -109,7 +187,7 @@ export function ContactForm() {
     >
       <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] pointer-events-none" />
 
-      <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
+      <form onSubmit={handleSubmit} noValidate className="relative z-10 space-y-6">
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-2">
             <label htmlFor="name" className="text-sm font-medium text-slate-300 ml-1">
@@ -127,7 +205,7 @@ export function ContactForm() {
                 value={formState.name}
                 onChange={handleChange}
                 className="w-full bg-[#020617]/50 border border-slate-800 rounded-xl py-3 pl-11 pr-4 text-foreground placeholder-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-[var(--primary)] transition-all duration-300 hover:border-slate-700"
-                placeholder="John Doe"
+                placeholder="Ali"
               />
             </div>
           </div>
@@ -148,12 +226,9 @@ export function ContactForm() {
                 value={formState.email}
                 onChange={handleChange}
                 className="w-full bg-[#020617]/50 border border-slate-800 rounded-xl py-3 pl-11 pr-4 text-foreground placeholder-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-[var(--primary)] transition-all duration-300 hover:border-slate-700"
-                placeholder="john@company.com"
+                placeholder="Ali@Babultech.com"
               />
             </div>
-            <p className="text-xs text-slate-500 ml-1">
-              Business email only. Free domains like Gmail, Outlook, Hotmail, Yahoo, AOL, and Live are not accepted.
-            </p>
           </div>
         </div>
 
@@ -172,9 +247,6 @@ export function ContactForm() {
             className="w-full bg-[#020617]/50 border border-slate-800 rounded-xl py-3 px-4 text-foreground placeholder-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-[var(--primary)] transition-all duration-300 hover:border-slate-700"
             placeholder="How can we help you?"
           />
-          <p className="text-xs text-slate-500 ml-1">
-            ASCII text only. Do not include HTML, scripts, or placeholder words like test/html.
-          </p>
         </div>
 
         <div className="space-y-2">
@@ -189,11 +261,8 @@ export function ContactForm() {
             value={formState.message}
             onChange={handleChange}
             className="w-full bg-[#020617]/50 border border-slate-800 rounded-xl py-3 px-4 text-foreground placeholder-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-[var(--primary)] transition-all duration-300 hover:border-slate-700 resize-none"
-            placeholder="Tell us about your project or inquiry..."
+            placeholder="How may we help you ?"
           />
-          <p className="text-xs text-slate-500 ml-1">
-            Plain ASCII text only. HTML tags/entities and test submissions are blocked.
-          </p>
         </div>
 
         <div className="space-y-3">

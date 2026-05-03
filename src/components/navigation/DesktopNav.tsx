@@ -2,11 +2,19 @@ import Link from 'next/link';
 import { ExternalLink } from 'lucide-react';
 import { primaryNavLinks, serviceItems } from '@/components/navigation/navigationData';
 
+function ServiceAbbreviation({ value }: { value: string }) {
+  return (
+    <div className="h-9 w-9 rounded-xl bg-white/5 border border-white/10 grid place-items-center text-[10px] font-bold text-primary shadow-[0_0_14px_rgba(16,185,129,0.16)]">
+      {value}
+    </div>
+  );
+}
+
 function DesktopServicesDropdown() {
   return (
     <div className="relative group">
       <button className="text-sm font-medium text-body hover:text-foreground transition-colors duration-200 py-6 focus:outline-none flex items-center gap-1.5">
-        Our Services
+        Services
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -35,9 +43,7 @@ function DesktopServicesDropdown() {
                   key={item.label}
                   className={`${commonClasses} mt-1 border border-white/10 bg-white/[0.03]`}
                 >
-                  <div className="h-9 w-9 rounded-xl bg-white/5 border border-white/10 grid place-items-center">
-                    <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_10px_rgba(16,185,129,0.6)]" />
-                  </div>
+                  <ServiceAbbreviation value={item.abbreviation} />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between gap-2">
                       <span className="text-sm font-semibold text-gray-100">{item.label}</span>
@@ -56,9 +62,7 @@ function DesktopServicesDropdown() {
                   href={item.href}
                   className={`${commonClasses} hover:bg-white/5 ${idx === 0 ? 'mb-1' : ''}`}
                 >
-                  <div className="h-9 w-9 rounded-xl bg-white/5 border border-white/10 grid place-items-center">
-                    <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_10px_rgba(16,185,129,0.6)]" />
-                  </div>
+                  <ServiceAbbreviation value={item.abbreviation} />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between gap-2">
                       <span className="text-sm font-semibold text-gray-100">{item.label}</span>
@@ -79,9 +83,7 @@ function DesktopServicesDropdown() {
                 rel="noopener noreferrer"
                 className={`${commonClasses} hover:bg-white/5 ${idx === 0 ? 'mb-1' : ''}`}
               >
-                <div className="h-9 w-9 rounded-xl bg-white/5 border border-white/10 grid place-items-center">
-                  <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_10px_rgba(16,185,129,0.6)]" />
-                </div>
+                <ServiceAbbreviation value={item.abbreviation} />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between gap-2">
                     <span className="text-sm font-semibold text-gray-100">{item.label}</span>

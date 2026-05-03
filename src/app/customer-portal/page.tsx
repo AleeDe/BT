@@ -4,39 +4,39 @@ import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbJsonLd, canonical, serviceJsonLd } from "@/lib/seo";
 
 const CLOUD_QUBE_DESCRIPTION =
-  "CloudQube is BabulTech's next-generation Salesforce consulting experience, helping teams move from problem to solution in minutes.";
+  "Customer Portal is BabulTech's next-generation Salesforce consulting experience, helping teams move from problem to solution in minutes.";
 
 export const metadata: Metadata = {
-  title: "CloudQube | BabulTech",
+  title: "Customer Portal | BabulTech",
   description: CLOUD_QUBE_DESCRIPTION,
-  alternates: { canonical: canonical("/cloud-qube") },
+  alternates: { canonical: canonical("/customer-portal") },
   openGraph: {
-    url: canonical("/cloud-qube"),
-    title: "CloudQube | BabulTech",
+    url: canonical("/customer-portal"),
+    title: "Customer Portal | BabulTech",
     description: CLOUD_QUBE_DESCRIPTION,
   },
   twitter: {
-    title: "CloudQube | BabulTech",
+    title: "Customer Portal | BabulTech",
     description: CLOUD_QUBE_DESCRIPTION,
   },
 };
 
-export default function CloudQubePage() {
+export default function CustomerPortalPage() {
   return (
     <>
       <JsonLd
         id="ld-cloud-qube-breadcrumbs"
         data={breadcrumbJsonLd([
           { name: "Home", url: "/" },
-          { name: "CloudQube", url: "/cloud-qube" },
+          { name: "Customer Portal", url: "/customer-portal" },
         ])}
       />
       <JsonLd
         id="ld-cloud-qube-service"
         data={serviceJsonLd({
-          name: "CloudQube Salesforce Consulting",
+          name: "Customer Portal Salesforce Consulting",
           description: CLOUD_QUBE_DESCRIPTION,
-          url: "/cloud-qube",
+          url: "/customer-portal",
           serviceType: "Salesforce Consulting",
         })}
       />
