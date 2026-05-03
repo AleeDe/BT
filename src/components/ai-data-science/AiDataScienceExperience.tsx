@@ -176,7 +176,7 @@ function AiHeroAnimation({ reduceMotion }: { reduceMotion: boolean }) {
       initial={reduceMotion ? false : { opacity: 0, x: 36, scale: 0.96 }}
       animate={{ opacity: 1, x: 0, scale: 1 }}
       transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
-      className="relative hidden min-h-[520px] lg:block"
+      className="relative hidden min-h-[590px] lg:block"
       aria-hidden="true"
     >
       <div className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle_at_50%_25%,rgba(16,185,129,0.22),transparent_34%),linear-gradient(145deg,rgba(15,23,42,0.88),rgba(2,6,23,0.52))] shadow-[0_30px_100px_-50px_rgba(16,185,129,0.65)]" />
@@ -197,7 +197,7 @@ function AiHeroAnimation({ reduceMotion }: { reduceMotion: boolean }) {
         </>
       )}
 
-      <div className="relative z-10 p-8">
+      <div className="relative z-10 flex h-full flex-col p-8">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">
@@ -210,11 +210,11 @@ function AiHeroAnimation({ reduceMotion }: { reduceMotion: boolean }) {
           </div>
         </div>
 
-        <div className="mt-8 grid grid-cols-3 gap-3">
+        <div className="mt-7 grid grid-cols-3 gap-3">
           {heroPipeline.map(({ icon: Icon, label, detail }, index) => (
             <motion.div
               key={label}
-              className="relative rounded-2xl bg-white/[0.05] p-4"
+              className="relative rounded-2xl bg-white/[0.05] p-3.5"
               animate={reduceMotion ? undefined : { y: [0, -7, 0] }}
               transition={{
                 duration: 3.4,
@@ -226,13 +226,13 @@ function AiHeroAnimation({ reduceMotion }: { reduceMotion: boolean }) {
               <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
                 <Icon className="h-5 w-5" />
               </div>
-              <p className="mt-3 text-center text-sm font-bold text-slate-100">{label}</p>
+              <p className="mt-3 text-center text-xs font-bold text-slate-100 xl:text-sm">{label}</p>
               <p className="mt-1 text-center text-[11px] text-slate-500">{detail}</p>
             </motion.div>
           ))}
         </div>
 
-        <div className="mt-8 rounded-3xl bg-slate-950/70 p-5">
+        <div className="mt-7 rounded-3xl bg-slate-950/70 p-5">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-slate-200">Opportunity detected</span>
             <span className="rounded-full bg-primary/15 px-3 py-1 text-xs font-bold text-primary">
@@ -240,7 +240,7 @@ function AiHeroAnimation({ reduceMotion }: { reduceMotion: boolean }) {
             </span>
           </div>
 
-          <div className="mt-5 space-y-4">
+          <div className="mt-5 space-y-3.5">
             {heroSignals.map((signal, index) => (
               <div key={signal.label}>
                 <div className="mb-2 flex items-center justify-between text-xs">
@@ -261,7 +261,7 @@ function AiHeroAnimation({ reduceMotion }: { reduceMotion: boolean }) {
         </div>
 
         <motion.div
-          className="absolute bottom-8 left-8 right-8 rounded-3xl bg-white/[0.06] p-5"
+          className="mt-5 rounded-3xl bg-white/[0.06] p-5"
           animate={reduceMotion ? undefined : { y: [0, 8, 0] }}
           transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
         >
